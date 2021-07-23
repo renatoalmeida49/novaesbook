@@ -7,11 +7,11 @@
   </header>
   
   <div class="form-login">
-      <input type="email" placeholder="Digite seu e-mail">
+      <input type="email" placeholder="Digite seu e-mail" v-model="email">
 
-      <input type="password" placeholder="Digite sua senha">
+      <input type="password" placeholder="Digite sua senha" v-model="password">
 
-      <button>Acessar</button>
+      <button @click="login">Acessar</button>
 
       <a href="">Ainda não tem conta? Cadastre-se</a>
   </div>
@@ -20,7 +20,18 @@
 
 <script>
 export default {
-
+    name: "Login",
+    data() {
+        return {
+            email: '',
+            password: ''
+        }
+    },
+    methods: {
+        login() {
+            console.log('Email: ', this.email)
+        }
+    }
 }
 </script>
 

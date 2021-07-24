@@ -2,21 +2,47 @@
 <div>
     <TheHeader />
 
-    <router-view></router-view>
+    <section id="content">
+        <TheAside />
+
+        <div class="view">
+            <router-view></router-view>
+        </div>
+
+        <TheColumn />
+    </section>
 </div>
 </template>
 
 <script>
 import TheHeader from "@/views/layout/TheHeader"
+import TheAside from "@/views/layout/TheAside"
+import TheColumn from "@/views/layout/TheColumn"
 
 export default {
     name: "TheLayout",
     components: {
-        TheHeader
+        TheHeader,
+        TheAside,
+        TheColumn
     }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+#content {
+    display: flex;
+    height: inherit;
+    max-width: 1040px;
+    margin: auto;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
 
+    .view {
+        display: flex;
+        flex: 1;
+        width: 100%;
+    }
+}
 </style>

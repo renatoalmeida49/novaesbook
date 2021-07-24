@@ -13,6 +13,12 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+div {
+  width: 100%;
+}
+h1 {
+  background: #fff;
+  width: 100%;
+}
 </style>

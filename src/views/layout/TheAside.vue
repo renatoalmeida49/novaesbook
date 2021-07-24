@@ -18,7 +18,7 @@
                 <img src="@/assets/icons/photo.png" width="16" height="16" alt="Home icon">
                 Fotos
             </li>
-            <div>(Spliter</div>
+            <div class="spliter"></div>
             <li>
                 <img src="@/assets/icons/settings.png" width="16" height="16" alt="Home icon">
                 Configurações
@@ -47,6 +47,29 @@ export default {
     .nav {
         ul {
             list-style: none;
+
+            li {
+                padding: 5px;
+                margin-bottom: 2px;
+                cursor: pointer;
+                border: 1px solid transparent;
+                display: flex;
+                align-items: center;
+
+                &:hover {
+                    background-color: #d1d9e0;
+                    border: 1px solid #CCC;
+                }
+
+                img {
+                    margin-right: 5px;
+                }
+            }
+
+            .spliter {
+                border: 1px solid #ccc;
+                margin: 5px 0;
+            }
         }
     }
 }

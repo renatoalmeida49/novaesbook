@@ -15,6 +15,10 @@ export default new Vuex.Store({
   mutations: {
     login(state, payload) {
       state.user = payload.user
+    },
+    logout(state) {
+      state.token = '',
+      state.user = ''
     }
   },
   actions: {
@@ -35,6 +39,11 @@ export default new Vuex.Store({
           context.commit('login', payload)
         })
       
+    },
+    logout(context) {
+      localStorage.removeItem('token')
+
+      context.commit('logout',)
     }
   },
   getters: {

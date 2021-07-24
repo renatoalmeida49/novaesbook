@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
@@ -27,6 +28,7 @@ export default new Vuex.Store({
           const user = response.data.user
 
           localStorage.setItem('token', token)
+          localStorage.setItem('user', user)
 
           payload.user = user
 
@@ -39,5 +41,6 @@ export default new Vuex.Store({
     user(state) {
       return state.user
     }
-  }
+  },
+  plugins: [createPersistedState()]
 })

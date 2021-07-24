@@ -7,7 +7,7 @@
 
           <div class="head-side">
               <div class="left">
-                  <input type="text" placeholder="Pesquisar">
+                  <input type="text" placeholder="Pesquisar" class="search-input">
               </div>
 
               <div class="right">
@@ -70,6 +70,28 @@ header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+
+            .left {
+                .search-input {
+                    background-color: #224b7a;
+                    background-image: url('../../assets/icons/search.png');
+                    background-size: 13px;
+                    background-position-x: 10px;
+                    background-position-y: center;
+                    background-repeat: no-repeat;
+                    width: 200px;
+                    height: 25px;
+                    border-radius: 15px;
+                    border: 0;
+                    outline: 0;
+                    padding-left: 30px;
+                    transition: all .3s;
+
+                    &::placeholder {
+                        color: #A2B4C9;
+                    }
+                }
+            }
 
             .right {
                 display: flex;

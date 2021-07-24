@@ -13,7 +13,7 @@
               <div class="right">
                   <p class="user-name">{{ user.name }}</p>
                   <img :src="getImage" width="24" height="24" alt="Avatar">
-                  <button class="logout">
+                  <button class="logout" @click="submitLogout">
                       <img src="@/assets/icons/power_white.png" width="18" height="18" alt="Logout">
                   </button>
               </div>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
     name: "TheHeader",
@@ -36,6 +36,15 @@ export default {
             else {
                 return require(this.user.avatar)
             }
+        }
+    },
+    methods: {
+        ...mapActions(['logout']),
+
+        submitLogout() {
+            this.logout()
+
+            this.$router.push({ name: 'Login' })
         }
     }
 }

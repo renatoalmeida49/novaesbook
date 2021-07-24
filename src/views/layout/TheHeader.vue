@@ -11,8 +11,11 @@
               </div>
 
               <div class="right">
-                  <p>{{ user.name }}</p>
-                  <button>Logoff</button>
+                  <p class="user-name">{{ user.name }}</p>
+                  <img :src="getImage" width="24" height="24" alt="Avatar">
+                  <button class="logout">
+                      <img src="@/assets/icons/power_white.png" width="18" height="18" alt="Logout">
+                  </button>
               </div>
           </div>
       </div>
@@ -25,7 +28,15 @@ import { mapGetters } from 'vuex'
 export default {
     name: "TheHeader",
     computed: {
-        ...mapGetters(['user'])
+        ...mapGetters(['user']),
+
+        getImage() {
+            if (this.user.avatar == '')
+                return require('@/assets/images/default-avatar.jpg')
+            else {
+                return require(this.user.avatar)
+            }
+        }
     }
 }
 </script>
@@ -63,6 +74,23 @@ header {
             .right {
                 display: flex;
                 align-items: center;
+
+                .user-name {
+                    color: #fff;
+                    font-weight: 700;
+                    margin-right: 10px;
+                }
+
+                img {
+                    border-radius: 50%;
+                    margin-right: 10px;
+                }
+
+                .logout {
+                    border: none;
+                    background: transparent;
+                    cursor: pointer;
+                }
             }
         }
     }

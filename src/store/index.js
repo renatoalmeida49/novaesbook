@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -11,14 +12,13 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    auth_success(state, payload) {
-      console.log('Mutation payload: ', payload.user)
+    login(state, payload) {
       state.user = payload.user
     }
   },
   actions: {
-    login(context, payload) {
-      this.$http.post('http://localhost:5000/users/sign-in', {
+    async login(context, payload) {
+      await axios.post('http://localhost:4000/users/sign-in', {
         email: payload.email,
         password: payload.password
       })

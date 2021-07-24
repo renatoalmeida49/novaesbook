@@ -7,11 +7,11 @@
   </header>
   
   <div class="form-login">
-      <input type="email" placeholder="Digite seu e-mail" v-model="email">
+      <input type="email" placeholder="Digite seu e-mail" v-model="credentials.email">
 
-      <input type="password" placeholder="Digite sua senha" v-model="password">
+      <input type="password" placeholder="Digite sua senha" v-model="credentials.password">
 
-      <button @click="login">Acessar</button>
+      <button @click="submitLogin">Acessar</button>
 
       <a href="">Ainda não tem conta? Cadastre-se</a>
   </div>
@@ -19,17 +19,27 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
     name: "Login",
     data() {
         return {
-            email: '',
-            password: ''
+            credentials: {
+                email: '',
+                password: ''
+            }
         }
     },
     methods: {
-        login() {
-            console.log('Email: ', this.email)
+        ...mapActions(['login']),
+
+        async submitLogin() {
+            await this.login(this.credentials)
+                
+            if (localStorage.getItem('token') != null) {
+                this.$router.push({ name: 'Home'})
+            }
         }
     }
 }

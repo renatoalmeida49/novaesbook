@@ -3,7 +3,7 @@
     <nav class="nav">
         <ul>
             <li>
-                <router-link :to="{ path: '/'}">
+                <router-link :to="{ path: '/home'}">
                     <img src="@/assets/icons/home-run.png" width="16" height="16" alt="Home icon">
                     Home
                 </router-link>

@@ -36,7 +36,7 @@
                 </router-link>
             </li>
             <li>
-                <a href="">
+                <a @click="submitLogout">
                     <img src="@/assets/icons/power.png" width="16" height="16" alt="Home icon">
                     Sair
                 </a>
@@ -47,8 +47,21 @@
 </template>
 
 <script>
-export default {
+import { mapActions } from 'vuex'
 
+export default {
+    name: "TheAside",
+    methods: {
+        ...mapActions(['logout']),
+
+        submitLogout(event) {
+            event.preventDefault()
+            
+            this.logout()
+
+            this.$router.push({ name: 'Login' })
+        }
+    }
 }
 </script>
 

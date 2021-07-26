@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import TheLayout from '../views/pages/TheLayout'
 import Home from '../views/pages/home'
+import Settings from '../views/pages/settings'
 import Login from '../views/pages/login'
 import NotFound from '../views/pages/NotFound'
 
@@ -20,6 +21,11 @@ const routes = [
         path: '',
         name: 'Home',
         component: Home
+      },
+      {
+        path: 'settings',
+        name: 'Settings',
+        component: Settings
       },
       {
         path: '*',

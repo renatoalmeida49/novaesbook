@@ -9,7 +9,7 @@
             <router-view></router-view>
         </div>
 
-        <TheColumn />
+        <TheColumn v-if="showColumn" />
     </section>
 </div>
 </template>
@@ -25,6 +25,11 @@ export default {
         TheHeader,
         TheAside,
         TheColumn
+    },
+    computed: {
+        showColumn() {
+            return this.$route.path == '/profile' ? false : true 
+        }
     }
 }
 </script>

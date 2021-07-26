@@ -3,29 +3,43 @@
     <nav class="nav">
         <ul>
             <li>
-            <img src="@/assets/icons/home-run.png" width="16" height="16" alt="Home icon">
-                Home
+                <router-link :to="{ path: '/'}">
+                    <img src="@/assets/icons/home-run.png" width="16" height="16" alt="Home icon">
+                    Home
+                </router-link>
             </li>
             <li>
-                <img src="@/assets/icons/user.png" width="16" height="16" alt="Home icon">
-                Meu perfil
+                <router-link :to="{ path: '/profile'}">
+                    <img src="@/assets/icons/user.png" width="16" height="16" alt="Home icon">
+                    Meu perfil
+                </router-link>
             </li>
             <li>
-                <img src="@/assets/icons/friends.png" width="16" height="16" alt="Home icon">
-                Amigos
+                <router-link :to="{ path: '/friends'}">
+                    <img src="@/assets/icons/friends.png" width="16" height="16" alt="Home icon">
+                    Amigos
+                </router-link>
             </li>
             <li>
-                <img src="@/assets/icons/photo.png" width="16" height="16" alt="Home icon">
-                Fotos
+                <router-link :to="{ path: '/photos'}">
+                    <img src="@/assets/icons/photo.png" width="16" height="16" alt="Home icon">
+                    Fotos
+                </router-link>
             </li>
+
             <div class="spliter"></div>
+
             <li>
-                <img src="@/assets/icons/settings.png" width="16" height="16" alt="Home icon">
-                Configurações
+                <router-link :to="{ path: '/settings'}">
+                    <img src="@/assets/icons/settings.png" width="16" height="16" alt="Home icon">
+                    Configurações
+                </router-link>
             </li>
             <li>
-                <img src="@/assets/icons/power.png" width="16" height="16" alt="Home icon">
-                Sair
+                <a href="">
+                    <img src="@/assets/icons/power.png" width="16" height="16" alt="Home icon">
+                    Sair
+                </a>
             </li>
         </ul>
     </nav>
@@ -41,7 +55,6 @@ export default {
 <style lang="scss" scoped>
 .aside {
     width: 190px;
-    color: #224b7a;
     text-align: left;
 
     .nav {
@@ -55,6 +68,19 @@ export default {
                 border: 1px solid transparent;
                 display: flex;
                 align-items: center;
+
+                a {
+                    text-decoration: none;
+                    color: #224b7a;
+                    padding: 5px;
+                    display: block;
+                    width: 100%;
+
+                    &.router-link-exact-active {
+                        background-color: #d1d9e0;
+                        border: 1px solid #CCC;
+                    }
+                }
 
                 &:hover {
                     background-color: #d1d9e0;

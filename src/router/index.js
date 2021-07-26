@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import TheLayout from '../views/pages/TheLayout'
 import Home from '../views/pages/home'
 import Settings from '../views/pages/settings'
+import Profile from '../views/pages/profile'
 import Login from '../views/pages/login'
 import NotFound from '../views/pages/NotFound'
 
@@ -13,12 +14,13 @@ const routes = [
     path: '/',
     name: 'TheLayout',
     component: TheLayout,
+    redirect: '/home',
     meta: {
       requiresAuth: true
     },
     children: [
       {
-        path: '',
+        path: 'home',
         name: 'Home',
         component: Home
       },
@@ -26,6 +28,11 @@ const routes = [
         path: 'settings',
         name: 'Settings',
         component: Settings
+      },
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: Profile
       },
       {
         path: '*',

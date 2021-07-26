@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import TheLayout from '../views/pages/TheLayout'
 import Home from '../views/pages/home'
 import Login from '../views/pages/login'
+import NotFound from '../views/pages/NotFound'
 
 Vue.use(VueRouter)
 
@@ -19,6 +20,11 @@ const routes = [
         path: '',
         name: 'Home',
         component: Home
+      },
+      {
+        path: '*',
+        name: '404',
+        component: NotFound
       }
     ]
   },
@@ -26,7 +32,7 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
-  }
+  },
 ]
 
 const router = new VueRouter({

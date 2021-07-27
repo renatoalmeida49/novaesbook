@@ -5,7 +5,7 @@
         <div class="profile-info">
             <div class="photo-name">
                 <img src="@/assets/images/default-avatar.jpg" width="50" height="50" alt="Profile picture">
-                <p>(user name</p>
+                <p>{{ user.name }}</p>
             </div>
 
             <div class="numbers">
@@ -28,8 +28,8 @@
     <div class="content">
         <div class="column">
             <div class="box">
-                <p>(bithdate)</p>
-                <p>Work</p>
+                <p>{{ user.birthdate }}</p>
+                <p>{{ user.work }}</p>
             </div>
 
             <div class="box">
@@ -109,8 +109,12 @@ export default {
 
         .profile-info {
             background: #fff;
+            border: 1px solid #c9cacc;
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            border-radius: 5px;
 
             .photo-name {
                 display: flex;
@@ -118,11 +122,24 @@ export default {
 
                 img {
                     border-radius: 50%;
+                    margin-right: 8px;
                 }
             }
 
             .numbers {
                 display: flex;
+                gap: 50px;
+
+                span {
+                    font-weight: bold;
+                    font-size: 20px;
+                    color: #224b7a;
+                }
+
+                p {
+                    font-size: 14px;
+                    color: #999;
+                }
             }
         }
     }

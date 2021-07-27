@@ -1,14 +1,14 @@
 <template>
-<div class="profle-content">
+<div class="profile-content">
     <div class="header">
         <div class="cover"></div>
         <div class="profile-info">
-            <div>
+            <div class="photo-name">
                 <img src="@/assets/images/default-avatar.jpg" width="50" height="50" alt="Profile picture">
                 <p>(user name</p>
             </div>
 
-            <div>
+            <div class="numbers">
                 <div>
                     <span>14</span>
                     <p>Seguidores</p>
@@ -47,7 +47,9 @@
         <div class="posts">
             <div class="photos"></div>
 
-            <div>O que você está pensando</div>
+            <NewPost />
+
+            <ThePost />
         </div>
     </div>
     
@@ -55,11 +57,68 @@
 </template>
 
 <script>
+import NewPost from "@/components/NewPost"
+import ThePost from "@/components/ThePost"
+
 export default {
     name: "Profile",
+    components: {
+        NewPost,
+        ThePost
+    }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.profile-content {
+    width: 100%;
 
+    .header {
+        margin-bottom: 10px;
+
+        .cover {
+            height: 250px;
+        }
+
+        .profile-info {
+            background: #fff;
+            display: flex;
+            justify-content: space-between;
+
+            .photo-name {
+                display: flex;
+                align-items: center;
+
+                img {
+                    border-radius: 50%;
+                }
+            }
+
+            .numbers {
+                display: flex;
+            }
+        }
+    }
+
+    .content {
+        display: flex;
+        gap: 10px;
+
+        .column {
+            width: 250px;
+
+            .box {
+                background: #fff;
+                border: 1px solid #c9cacc;
+                border-radius: 5px;
+                margin-bottom: 10px;
+                padding: 8px;
+            }
+        }
+
+        .posts {
+            flex: 1;
+        }
+    }
+}
 </style>

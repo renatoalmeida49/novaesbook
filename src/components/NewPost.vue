@@ -2,9 +2,9 @@
 <div class="new-post">
     <img :src="getImage" class="user-avatar" alt="User avatar" width="50" height="50">
 
-    <input type="text" class="post-body" :placeholder="getPlaceholderText" />
+    <input type="text" class="post-body" v-model="post.body" @keyup.enter="submitNewPost" :placeholder="getPlaceholderText" />
 
-    <button class="button-send">
+    <button class="button-send" @click="submitNewPost">
         <img src="@/assets/icons/send.png" width="25" height="25" alt="Icon send">
     </button>
 </div>
@@ -15,6 +15,14 @@ import { mapGetters } from 'vuex'
 
 export default {
     name: "NewPost",
+    data() {
+        return {
+            post: {
+                body: '',
+                type: 'text'
+            }
+        }
+    },
     computed: {
         ...mapGetters(['user']),
 
@@ -28,6 +36,16 @@ export default {
 
         getPlaceholderText() {
             return `O que você está pensando, ${this.user.name}?`
+        }
+    },
+    methods: {
+        async submitNewPost() {
+            await this.$http.post('/posts/new-post', {
+                type: this.post.type,
+                body: this.post.body
+            })
+                
+            this.post.body = ''
         }
     }
 }

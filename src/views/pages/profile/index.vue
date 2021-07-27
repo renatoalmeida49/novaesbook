@@ -49,7 +49,9 @@
 
             <NewPost />
 
-            <ThePost />
+            <template v-for="(post, index) in posts">
+                <ThePost :key="index" :post="post"/>
+            </template>
         </div>
     </div>
     
@@ -57,6 +59,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import NewPost from "@/components/NewPost"
 import ThePost from "@/components/ThePost"
 
@@ -65,6 +69,29 @@ export default {
     components: {
         NewPost,
         ThePost
+    },
+    data() {
+        return {
+            posts: null
+        }
+    },
+    mounted() {
+        this.getUserPosts()
+    },
+    computed: {
+        ...mapGetters(['user'])
+    },
+    methods: {
+        getUserPosts() {
+            const id = this.user.id
+
+            this.$http.post('posts/user-posts', {
+                userId: id
+            })
+                .then(response => {
+                    this.posts = response.data.posts
+                })
+        }
     }
 }
 </script>

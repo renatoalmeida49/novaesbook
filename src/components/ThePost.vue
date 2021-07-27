@@ -4,8 +4,8 @@
       <img src="@/assets/images/default-avatar.jpg" width="50" height="50" alt="Avatar post">
       
       <div class="author">
-        <p>(Autor do post) fez um post</p>
-        <p>25/10/1996</p>
+        <p>{{ post.user.name }} fez um post</p>
+        <p>{{ post.createdAt }}</p>
       </div>
       <div>
         <img src="@/assets/icons/more.png" width="20" height="20" alt="Ícone opções">
@@ -13,7 +13,7 @@
 
     </div>
     <div class="body">
-      Grandíssimo! Bravo!
+      {{ post.body }}
     </div>
     <div class="reactions">
       <img src="@/assets/icons/heart-off.png" width="25" height="25" alt="Like icon"> 0
@@ -28,7 +28,8 @@
 
 <script>
 export default {
-    name: "ThePost"
+    name: "ThePost",
+    props: ['post']
 }
 </script>
 

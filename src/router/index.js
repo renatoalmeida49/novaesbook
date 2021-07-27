@@ -11,6 +11,11 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
     path: '/',
     name: 'TheLayout',
     component: TheLayout,
@@ -34,18 +39,13 @@ const routes = [
         name: 'Profile',
         component: Profile
       },
-      {
-        path: '*',
-        name: '404',
-        component: NotFound
-      }
     ]
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: Login
-  },
+    path: '*',
+    name: '404',
+    component: NotFound
+  }
 ]
 
 const router = new VueRouter({

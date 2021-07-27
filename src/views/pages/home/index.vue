@@ -2,7 +2,9 @@
 <div class="home-content">
   <NewPost />
 
-  <ThePost />
+  <template v-for="(post, index) in posts">
+    <ThePost :key="index" :post="post" />
+  </template>
 </div>
 </template>
 
@@ -16,6 +18,11 @@ export default {
     NewPost,
     ThePost
   },
+  data() {
+    return {
+      posts: null
+    }
+  }
 }
 </script>
 

@@ -28,7 +28,7 @@
     <div class="content">
         <div class="column">
             <div class="box">
-                <p>{{ user.birthdate }}</p>
+                <p>{{ user.birthdate | dateFormat }}</p>
                 <p>{{ user.work }}</p>
             </div>
 

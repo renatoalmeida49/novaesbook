@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 import NewPost from "@/components/NewPost"
 import ThePost from "@/components/ThePost"
@@ -72,14 +72,15 @@ export default {
     },
     data() {
         return {
-            posts: null
+            userPosts: [],
         }
     },
     mounted() {
-        this.getUserPosts()
+        this.getPosts()
     },
     computed: {
         ...mapGetters('user', ['user']),
+        ...mapGetters('post', ['posts']),
 
         getBackground() {
             return {
@@ -88,15 +89,10 @@ export default {
         }
     },
     methods: {
-        getUserPosts() {
-            const id = this.user.id
+        ...mapActions('post', ['myPosts']),
 
-            this.$http.post('posts/user-posts', {
-                userId: id
-            })
-                .then(response => {
-                    this.posts = response.data.posts
-                })
+        async getPosts() {
+            await this.myPosts({ userId: this.user.id })
         }
     }
 }

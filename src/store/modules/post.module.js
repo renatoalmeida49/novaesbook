@@ -28,13 +28,15 @@ const actions = {
             body: payload.body
         })
             .then(response => {
+                const vuex = JSON.parse(localStorage.getItem('vuex'))
+
                 const post = {
-                    id: response.data.id,
-                    userId: response.data.userId,
-                    type: response.data.type,
-                    body: response.data.body,
-                    updatedAt: response.data.updatedAt,
-                    createdAt: response.data.createdAt
+                    id: response.data.data.id,
+                    user: vuex.user.user,
+                    type: response.data.data.type,
+                    body: response.data.data.body,
+                    updatedAt: response.data.data.updatedAt,
+                    createdAt: response.data.data.createdAt
                 }
 
                 payload.post = post

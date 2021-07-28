@@ -23,18 +23,18 @@
         <input type="text" v-model="userInfo.work">
 
         <label>Nova senha:</label>
-        <input type="text">
+        <input type="text" disabled>
 
         <label>Confirmar senha:</label>
-        <input type="text">
+        <input type="text" disabled>
 
-        <button>Atualizar informações</button>
+        <button @click="submitUpdate">Atualizar informações</button>
     </div>
 </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
     name: "Settings",
@@ -48,6 +48,14 @@ export default {
     },
     computed: {
         ...mapGetters(['user'])
+    },
+    methods: {
+        ...mapActions(['update']),
+
+        async submitUpdate() {
+            console.log("componente: ", this.userInfo)
+            await this.update(this.userInfo)
+        }
     }
 }
 </script>

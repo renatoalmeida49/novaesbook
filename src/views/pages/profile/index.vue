@@ -1,11 +1,11 @@
 <template>
 <div class="profile-content">
     <div class="header">
-        <div class="cover"></div>
+        <div class="cover" :style="getBackground"></div>
         <div class="profile-info">
             <div class="photo-name">
                 <img src="@/assets/images/default-avatar.jpg" width="50" height="50" alt="Profile picture">
-                <p>{{ user.name }}</p>
+                <p class="name">{{ user.name }}</p>
             </div>
 
             <div class="numbers">
@@ -79,7 +79,13 @@ export default {
         this.getUserPosts()
     },
     computed: {
-        ...mapGetters(['user'])
+        ...mapGetters(['user']),
+
+        getBackground() {
+            return {
+                backgroundImage: `url(${require('@/assets/images/default-cover.jpg')}`
+            }
+        }
     },
     methods: {
         getUserPosts() {
@@ -105,6 +111,8 @@ export default {
 
         .cover {
             height: 250px;
+            background-size: cover;
+            background-position: center;
         }
 
         .profile-info {
@@ -122,7 +130,12 @@ export default {
 
                 img {
                     border-radius: 50%;
-                    margin-right: 8px;
+                    margin-right: 20px;
+                }
+
+                .name {
+                    color: #000;
+                    font-size: 20px;
                 }
             }
 

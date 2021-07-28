@@ -19,7 +19,7 @@ export default new Vuex.Store({
     logout(state) {
       state.token = '',
       state.user = ''
-    }
+    },
   },
   actions: {
     async login(context, payload) {
@@ -44,6 +44,25 @@ export default new Vuex.Store({
       localStorage.removeItem('token')
 
       context.commit('logout',)
+    },
+    async update(context, payload) {
+      await axios.put('http://localhost:4000/users/update', {
+        id: payload.id,
+        name: payload.name,
+        email: payload.email,
+        birthdate: payload.birthdate,
+        city: payload.city,
+        work: payload.work,
+      })
+        .then(response => {
+          const user = response.data.user
+
+          localStorage.setItem('user', user)
+
+          payload.user = user
+
+          context.commit('login', payload)
+        })
     }
   },
   getters: {

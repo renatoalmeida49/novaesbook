@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import { api } from './services/api'
-import './filters'
+import './common/utils/filters'
 
 Vue.config.productionTip = false
 

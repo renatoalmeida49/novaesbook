@@ -87,7 +87,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['login']),
+        ...mapActions('user', ['login']),
 
         async submitLogin() {
             await this.login(this.credentials)

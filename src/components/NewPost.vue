@@ -24,7 +24,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['user']),
+        ...mapGetters('user', ['user']),
 
         getImage() {
             if (this.user.avatar == '')

@@ -52,7 +52,7 @@ import { mapActions } from 'vuex'
 export default {
     name: "TheAside",
     methods: {
-        ...mapActions(['logout']),
+        ...mapActions('user', ['logout']),
 
         submitLogout(event) {
             event.preventDefault()

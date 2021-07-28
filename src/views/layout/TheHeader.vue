@@ -28,7 +28,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
     name: "TheHeader",
     computed: {
-        ...mapGetters(['user']),
+        ...mapGetters('user', ['user']),
 
         getImage() {
             if (this.user.avatar == '')
@@ -39,7 +39,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['logout']),
+        ...mapActions('user', ['logout']),
 
         submitLogout() {
             this.logout()

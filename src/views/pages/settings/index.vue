@@ -47,13 +47,12 @@ export default {
         this.userInfo = this.user
     },
     computed: {
-        ...mapGetters(['user'])
+        ...mapGetters('user', ['user'])
     },
     methods: {
-        ...mapActions(['update']),
+        ...mapActions('user', ['update']),
 
         async submitUpdate() {
-            console.log("componente: ", this.userInfo)
             await this.update(this.userInfo)
         }
     }

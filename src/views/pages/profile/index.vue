@@ -79,7 +79,7 @@ export default {
         this.getUserPosts()
     },
     computed: {
-        ...mapGetters(['user']),
+        ...mapGetters('user', ['user']),
 
         getBackground() {
             return {

@@ -5,7 +5,7 @@
       
       <div class="author">
         <p>{{ post.user.name }} fez um post</p>
-        <p>{{ post.createdAt }}</p>
+        <p>{{ post.createdAt | dateFormat }}</p>
       </div>
       <div>
         <img src="@/assets/icons/more.png" width="20" height="20" alt="Ícone opções">

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { api } from '../../services/api'
 
 const state = {
     userPosts: []
@@ -15,20 +15,15 @@ const mutations = {
 
 const actions = {
     async myPosts(context, payload) {
-        await axios.post('http://localhost:4000/posts/user-posts', {
+        await api.post('/posts/user-posts', {
             userId: payload.userId
-        },
-        {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
         })
             .then(response => {
                 context.commit('myPosts', response.data.posts)
             })
     },
     async newPost(context, payload) {
-        await axios.post('http://localhost:4000/posts/new-post', {
+        await api.post('/posts/new-post', {
             type: payload.type,
             body: payload.body
         })

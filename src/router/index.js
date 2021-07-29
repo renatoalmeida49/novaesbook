@@ -37,7 +37,14 @@ const routes = [
       {
         path: 'profile',
         name: 'Profile',
-        component: Profile
+        component: Profile,
+        children: [
+          {
+            path: ':id',
+            name: 'UserProfile',
+            component: Profile
+          }
+        ]
       },
     ]
   },

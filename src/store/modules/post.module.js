@@ -14,9 +14,11 @@ const mutations = {
 }
 
 const actions = {
-    async myPosts(context, payload) {
+    async getMyPosts(context) {
+        const vuex = JSON.parse(localStorage.getItem('vuex'))
+
         await api.post('/posts/user-posts', {
-            userId: payload.userId
+            userId: vuex.user.user.id
         })
             .then(response => {
                 context.commit('myPosts', response.data.posts)

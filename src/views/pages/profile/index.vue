@@ -5,7 +5,7 @@
         <div class="profile-info">
             <div class="photo-name">
                 <img src="@/assets/images/default-avatar.jpg" width="50" height="50" alt="Profile picture">
-                <p class="name">{{ user.name }}</p>
+                <p class="name">{{ userToShow.name }}</p>
             </div>
 
             <div class="numbers">
@@ -28,8 +28,8 @@
     <div class="content">
         <div class="column">
             <div class="box">
-                <p>{{ user.birthdate | dateFormat }}</p>
-                <p>{{ user.work }}</p>
+                <p>{{ userToShow.birthdate | dateFormat }}</p>
+                <p>{{ userToShow.work }}</p>
             </div>
 
             <div class="box">
@@ -49,7 +49,7 @@
 
             <NewPost />
 
-            <template v-for="(post, index) in posts">
+            <template v-for="(post, index) in postsToShow">
                 <ThePost :key="index" :post="post"/>
             </template>
         </div>
@@ -59,7 +59,8 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
+import { api } from '@/services/api'
 
 import NewPost from "@/components/NewPost"
 import ThePost from "@/components/ThePost"
@@ -72,11 +73,12 @@ export default {
     },
     data() {
         return {
-            userPosts: [],
+            userToShow: {},
+            postsToShow: []
         }
     },
     mounted() {
-        this.getPosts()
+        this.render()
     },
     computed: {
         ...mapGetters('user', ['user']),
@@ -88,11 +90,33 @@ export default {
             }
         }
     },
+    watch: {
+        '$route.params'() {
+            this.render()
+        }
+    },
     methods: {
-        ...mapActions('post', ['myPosts']),
+        render() {
+            if(this.$route.params.userId) {
+                console.log(this.$route.params.userId)
 
-        async getPosts() {
-            await this.myPosts({ userId: this.user.id })
+                api.post('/users/profile', {
+                    id: this.$route.params.userId
+                })
+                .then(response => {
+                    this.userToShow = response.data.user
+                })
+
+                api.post('/posts/user-posts', {
+                    userId: this.$route.params.userId
+                })
+                .then(response => {
+                    this.postsToShow = response.data.posts
+                })
+            } else {
+                this.userToShow = this.user
+                this.postsToShow = this.posts
+            }
         }
     }
 }

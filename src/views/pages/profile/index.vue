@@ -9,6 +9,8 @@
             </div>
 
             <div class="numbers">
+                <button class="button-relation" v-if="checkButton">Seguir</button>
+
                 <div>
                     <span>14</span>
                     <p>Seguidores</p>
@@ -31,6 +33,8 @@
                 <p>{{ userToShow.birthdate | dateFormat }}</p>
                 <p>{{ userToShow.work }}</p>
             </div>
+
+            
 
             <div class="box">
                 <div>
@@ -88,6 +92,10 @@ export default {
             return {
                 backgroundImage: `url(${require('@/assets/images/default-cover.jpg')}`
             }
+        },
+
+        checkButton() {
+            return this.$route.params.userId ? true : false
         }
     },
     watch: {
@@ -162,6 +170,19 @@ export default {
             .numbers {
                 display: flex;
                 gap: 50px;
+
+                .button-relation {
+                    border: 0;
+                    padding: 10px 20px;
+                    background-color: #4a76a8;
+                    border-radius: 10px;
+                    color: #FFF;
+                    font-size: 15px;
+                    cursor: pointer;
+                    box-shadow: 0px 0px 3px #999;
+                    text-decoration: none;
+                    display: inline-block;
+                }
 
                 span {
                     font-weight: bold;

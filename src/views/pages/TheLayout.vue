@@ -28,7 +28,7 @@ export default {
     },
     computed: {
         showColumn() {
-            return this.$route.path == '/profile' ? false : true 
+            return !this.$route.path.includes('/profile') 
         }
     }
 }

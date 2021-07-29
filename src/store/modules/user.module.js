@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { api } from '../../services/api'
 
 const state = {
     token: localStorage.getItem('token') || '',
@@ -17,7 +17,7 @@ const mutations = {
 
 const actions = {
     async login(context, payload) {
-        await axios.post('http://localhost:4000/users/sign-in', {
+        await api.post('/users/sign-in', {
           email: payload.email,
           password: payload.password
         })
@@ -40,7 +40,7 @@ const actions = {
         context.commit('logout',)
     },
     async update(context, payload) {
-        await axios.put('http://localhost:4000/users/update', {
+        await api.put('/users/update', {
             id: payload.id,
             name: payload.name,
             email: payload.email,

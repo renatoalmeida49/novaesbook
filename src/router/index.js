@@ -40,9 +40,9 @@ const routes = [
         component: Profile,
         children: [
           {
-            path: ':id',
+            path: ':userId',
             name: 'UserProfile',
-            component: Profile
+            component: Profile,
           }
         ]
       },

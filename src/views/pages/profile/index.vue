@@ -9,7 +9,9 @@
             </div>
 
             <div class="numbers">
-                <button class="button-relation" v-if="checkButton">Seguir</button>
+                <button class="button-relation" v-if="checkButton" @click="relation">
+                    {{ textButton }}
+                </button>
 
                 <div>
                     <span>14</span>
@@ -78,11 +80,13 @@ export default {
     data() {
         return {
             userToShow: {},
-            postsToShow: []
+            postsToShow: [],
+            isFollowing: false
         }
     },
     mounted() {
         this.render()
+        this.getRelation()
     },
     computed: {
         ...mapGetters('user', ['user']),
@@ -96,6 +100,10 @@ export default {
 
         checkButton() {
             return this.$route.params.userId ? true : false
+        },
+
+        textButton() {
+            return this.isFollowing ? 'Deixar de seguir' : 'Seguir'
         }
     },
     watch: {
@@ -106,8 +114,6 @@ export default {
     methods: {
         render() {
             if(this.$route.params.userId) {
-                console.log(this.$route.params.userId)
-
                 api.post('/users/profile', {
                     id: this.$route.params.userId
                 })
@@ -125,6 +131,24 @@ export default {
                 this.userToShow = this.user
                 this.postsToShow = this.posts
             }
+        },
+
+        relation() {
+            console.log('Relation')
+            console.log('User from: ', this.user.id)
+            console.log('User to: ', this.$route.params.userId)
+        },
+
+        getRelation() {
+            api.post('/relations/', {
+                user_from: this.user.id,
+                user_to: this.$route.params.userId
+            })
+                .then(response => {
+                    if (response.data.user) {
+                        this.isFollowing = true
+                    }
+                })
         }
     }
 }

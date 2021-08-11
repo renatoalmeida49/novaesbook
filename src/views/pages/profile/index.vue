@@ -134,18 +134,20 @@ export default {
         },
 
         relation() {
-            console.log('Relation')
-            console.log('User from: ', this.user.id)
-            console.log('User to: ', this.$route.params.userId)
+            api.put('/relations/', {
+                user_to: this.$route.params.userId
+            })
+                .then(() => {
+                    this.isFollowing = !this.isFollowing
+                })
         },
 
         getRelation() {
             api.post('/relations/', {
-                user_from: this.user.id,
                 user_to: this.$route.params.userId
             })
                 .then(response => {
-                    if (response.data.user) {
+                    if (response.data.flag) {
                         this.isFollowing = true
                     }
                 })

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { api } from '@/services/api'
 import NewPost from '@/components/NewPost'
 import ThePost from '@/components/ThePost'
 
@@ -24,11 +24,16 @@ export default {
       posts: null
     }
   },
-  created() {
-    this.getMyPosts()
+  mounted() {
+    this.getHomePage()
   },
   methods: {
-    ...mapActions('post', ['getMyPosts'])
+    getHomePage() {
+      api.get('/posts/')
+        .then(response => {
+          this.posts = response.data.posts
+        })
+    }
   }
 }
 </script>

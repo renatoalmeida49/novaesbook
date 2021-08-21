@@ -1,4 +1,6 @@
 import axios from 'axios'
+import router from '../router'
+import store from '../store'
 
 const instance = axios.create({
     baseURL: `http://localhost:4000/`,
@@ -12,6 +14,17 @@ instance.interceptors.request.use(
         return config
     }
 )
+
+instance.interceptors.response.use(response => {
+    if (response.status == '401') {
+        store.dispatch('user/logout')
+        router.push('/login')
+    }
+
+    return response
+}, error => {
+    console.log(error)
+})
 
 export const api = {
     get(endpoint) {

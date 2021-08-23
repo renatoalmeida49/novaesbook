@@ -119,12 +119,6 @@ export default {
                 })
                 .then(response => {
                     this.userToShow = response.data.user
-                })
-
-                api.post('/posts/user-posts', {
-                    userId: this.$route.params.userId
-                })
-                .then(response => {
                     this.postsToShow = response.data.posts
                 })
             } else {

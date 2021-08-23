@@ -2,7 +2,9 @@
   <header>
       <div class="container">
           <div class="logo">
-              <img src="@/assets/devsbook_logo.png" alt="Logo">
+            <router-link :to="{ name: 'Home'}">
+                <img src="@/assets/devsbook_logo.png" alt="Logo">
+            </router-link>
           </div>
 
           <div class="head-side">

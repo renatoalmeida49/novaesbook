@@ -32,11 +32,9 @@
     <div class="content">
         <div class="column">
             <div class="box">
-                <p>{{ userToShow.birthdate | dateFormat }}</p>
-                <p>{{ userToShow.work }}</p>
-            </div>
-
-            
+                <p class="line"><img src="@/assets/icons/calendar.png" width="20" height="20" alt="Data de nascimento"/>{{ userToShow.birthdate | dateFormat }}</p>
+                <p class="line"><img src="@/assets/icons/work.png" width="20" height="20" alt="Data de nascimento"/>{{ userToShow.work }}</p>
+            </div>       
 
             <div class="box">
                 <div>
@@ -235,6 +233,16 @@ export default {
                 border-radius: 5px;
                 margin-bottom: 10px;
                 padding: 8px;
+                
+                .line {
+                    text-align: left;
+                    padding: 10px 10px;
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+                    font-size: 13px;
+                    color: #819db9;
+                }
             }
         }
 

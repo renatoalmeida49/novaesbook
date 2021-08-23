@@ -4,7 +4,7 @@
       <img src="@/assets/images/default-avatar.jpg" width="50" height="50" alt="Avatar post">
       
       <div class="author">
-        <p>{{ post.user.name }} fez um post</p>
+        <p><router-link class="link-profile" :to="{ name: 'UserProfile', params: { userId: post.user.id}}">{{ post.user.name }}</router-link> fez um post</p>
         <p>{{ post.createdAt | dateFormat }}</p>
       </div>
       <div>
@@ -29,7 +29,7 @@
 <script>
 export default {
     name: "ThePost",
-    props: ['post']
+    props: ['post'],
 }
 </script>
 
@@ -54,6 +54,12 @@ export default {
         flex: 1;
         text-align: start;
         font-size: 14px;
+
+        .link-profile {
+          text-decoration: none;
+          font-weight: 700;
+          color: #3f5090;
+        }
       }
     }
 

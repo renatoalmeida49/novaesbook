@@ -14,11 +14,11 @@
                 </button>
 
                 <div>
-                    <span>14</span>
+                    <span>{{ followers }}</span>
                     <p>Seguidores</p>
                 </div>
                 <div>
-                    <span>54</span>
+                    <span>{{ following }}</span>
                     <p>Seguindo</p>
                 </div>
                 <div>
@@ -81,11 +81,18 @@ export default {
         return {
             userToShow: {},
             postsToShow: [],
-            isFollowing: false
+            isFollowing: false,
+            following: 0,
+            followers: 0,
         }
     },
     mounted() {
-        this.render()
+        if(this.$route.params.userId) {
+            this.getProfile(this.$route.params.userId)
+        } else {
+            this.getProfile(this.user.id)
+        }
+        
         this.getRelation()
     },
     computed: {
@@ -112,19 +119,16 @@ export default {
         }
     },
     methods: {
-        render() {
-            if(this.$route.params.userId) {
-                api.post('/users/profile', {
-                    id: this.$route.params.userId
+        getProfile(id) {
+            api.post('/users/profile', {
+                    id: id
                 })
                 .then(response => {
                     this.userToShow = response.data.user
                     this.postsToShow = response.data.posts
+                    this.following = response.data.following.length
+                    this.followers = response.data.followers.length
                 })
-            } else {
-                this.userToShow = this.user
-                this.postsToShow = this.posts
-            }
         },
 
         relation() {

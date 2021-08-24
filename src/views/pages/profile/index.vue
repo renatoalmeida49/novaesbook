@@ -14,11 +14,11 @@
                 </button>
 
                 <div>
-                    <span>{{ followers }}</span>
+                    <span>{{ followers.length }}</span>
                     <p>Seguidores</p>
                 </div>
                 <div>
-                    <span>{{ following }}</span>
+                    <span>{{ following.length }}</span>
                     <p>Seguindo</p>
                 </div>
                 <div>
@@ -37,14 +37,12 @@
             </div>       
 
             <div class="box">
-                <div>
-                    <p>Seguindo</p>
+                <div class="header">
+                    <p>Seguindo ({{ following.length }})</p>
                     <a href="">Ver todos</a>
                 </div>
                 
-                <div>
-                    <p>Avatares</p>
-                </div>
+                <FriendsList :friends="following" />
             </div>
         </div>
 
@@ -68,12 +66,14 @@ import { api } from '@/services/api'
 
 import NewPost from "@/components/NewPost"
 import ThePost from "@/components/ThePost"
+import FriendsList from "@/components/FriendsList.vue"
 
 export default {
     name: "Profile",
     components: {
         NewPost,
-        ThePost
+        ThePost,
+        FriendsList
     },
     data() {
         return {
@@ -124,8 +124,8 @@ export default {
                 .then(response => {
                     this.userToShow = response.data.user
                     this.postsToShow = response.data.posts
-                    this.following = response.data.following.length
-                    this.followers = response.data.followers.length
+                    this.following = response.data.following
+                    this.followers = response.data.followers
                 })
         },
 
@@ -233,6 +233,18 @@ export default {
                 border-radius: 5px;
                 margin-bottom: 10px;
                 padding: 8px;
+
+                .header {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 13px;
+                    padding: 10px;
+
+                    a {
+                        text-decoration: none;
+                        color: #999;
+                    }
+                }
                 
                 .line {
                     text-align: left;

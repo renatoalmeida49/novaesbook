@@ -1,11 +1,13 @@
 <template>
   <div class="friend-list">
       <template v-for="(friend, index) in friends">
-          <div :key="index" class="card">
-              <img :src="getImage(friend.to.avatar)" class="user-avatar" alt="User avatar" width="50" height="50">
+            <router-link :key="index" :to="{ name: 'UserProfile', params: { userId: friend.to.id} }">
+                <div class="card">
+                    <img :src="getImage(friend.to.avatar)" class="user-avatar" alt="User avatar" width="50" height="50">
 
-              <p>{{ friend.to.name }}</p>
-          </div>
+                    <p>{{ friend.to.name }}</p>
+                </div>
+            </router-link>
       </template>
   </div>
 </template>

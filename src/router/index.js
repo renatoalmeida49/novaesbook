@@ -49,7 +49,7 @@ const routes = [
           },
           {
             path: 'friends',
-            name: 'UserFriends',
+            name: 'Friends',
             component: Friends
           },
           {

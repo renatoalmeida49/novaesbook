@@ -14,12 +14,16 @@
                 </button>
 
                 <div>
-                    <span>{{ userProfile.followers.length }}</span>
-                    <p>Seguidores</p>
+                    <router-link :to="{ name: 'Friends' }">
+                        <span>{{ userProfile.followers.length }}</span>
+                        <p>Seguidores</p>
+                    </router-link>
                 </div>
                 <div>
-                    <span>{{ userProfile.following.length }}</span>
-                    <p>Seguindo</p>
+                    <router-link :to="{ name: 'Friends' }">
+                        <span>{{ userProfile.following.length }}</span>
+                        <p>Seguindo</p>
+                    </router-link>
                 </div>
                 <div>
                     <span>4</span>
@@ -53,11 +57,10 @@ export default {
     mounted() {
         if(this.$route.params.userId) {
             this.getProfile(this.$route.params.userId)
+            this.getRelation()
         } else {
             this.getProfile(this.user.id)
         }
-        
-        this.getRelation()
     },
     computed: {
         ...mapGetters('user', ['user']),
@@ -70,7 +73,11 @@ export default {
         },
 
         checkButton() {
-            return this.$route.params.userId ? true : false
+            if (this.$route.params.userId) {
+                return !(this.$route.params.userId == this.user.id)
+            } else {
+                return false
+            }
         },
 
         textButton() {
@@ -79,7 +86,12 @@ export default {
     },
     watch: {
         '$route.params'() {
-            this.getProfile(this.user.id)
+            if (this.$route.params.userId) {
+                this.getProfile(this.$route.params.userId)
+                this.getRelation()
+            } else {
+                this.getProfile(this.user.id)
+            }
         }
     },
     methods: {
@@ -109,9 +121,7 @@ export default {
                 user_to: this.$route.params.userId
             })
                 .then(response => {
-                    if (response.data.flag) {
-                        this.userProfile.isFollowing = true
-                    }
+                    this.userProfile.isFollowing = response.data.flag
                 })
         }
     }
@@ -181,6 +191,10 @@ export default {
                 p {
                     font-size: 14px;
                     color: #999;
+                }
+
+                a {
+                    text-decoration: none;
                 }
             }
         }

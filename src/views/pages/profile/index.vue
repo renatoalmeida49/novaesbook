@@ -5,7 +5,7 @@
         <div class="profile-info">
             <div class="photo-name">
                 <img src="@/assets/images/default-avatar.jpg" width="50" height="50" alt="Profile picture">
-                <p class="name">{{ userToShow.name }}</p>
+                <p class="name">{{ userProfile.userToShow.name }}</p>
             </div>
 
             <div class="numbers">
@@ -14,11 +14,11 @@
                 </button>
 
                 <div>
-                    <span>{{ followers.length }}</span>
+                    <span>{{ userProfile.followers.length }}</span>
                     <p>Seguidores</p>
                 </div>
                 <div>
-                    <span>{{ following.length }}</span>
+                    <span>{{ userProfile.following.length }}</span>
                     <p>Seguindo</p>
                 </div>
                 <div>
@@ -29,34 +29,7 @@
         </div>
     </div>
 
-    <div class="content">
-        <div class="column">
-            <div class="box">
-                <p class="line"><img src="@/assets/icons/calendar.png" width="20" height="20" alt="Data de nascimento"/>{{ userToShow.birthdate | dateFormat }}</p>
-                <p class="line"><img src="@/assets/icons/work.png" width="20" height="20" alt="Data de nascimento"/>{{ userToShow.work }}</p>
-            </div>       
-
-            <div class="box">
-                <div class="header">
-                    <p>Seguindo ({{ following.length }})</p>
-                    <a href="">Ver todos</a>
-                </div>
-                
-                <FriendsList :friends="following" />
-            </div>
-        </div>
-
-        <div class="posts">
-            <div class="photos"></div>
-
-            <NewPost />
-
-            <template v-for="(post, index) in postsToShow">
-                <ThePost :key="index" :post="post"/>
-            </template>
-        </div>
-    </div>
-    
+    <router-view :user="userProfile "/>
 </div>
 </template>
 
@@ -64,24 +37,17 @@
 import { mapGetters } from 'vuex'
 import { api } from '@/services/api'
 
-import NewPost from "@/components/NewPost"
-import ThePost from "@/components/ThePost"
-import FriendsList from "@/components/FriendsList.vue"
-
 export default {
     name: "Profile",
-    components: {
-        NewPost,
-        ThePost,
-        FriendsList
-    },
     data() {
         return {
-            userToShow: {},
-            postsToShow: [],
-            isFollowing: false,
-            following: 0,
-            followers: 0,
+            userProfile: {
+                userToShow: {},
+                postsToShow: [],
+                isFollowing: false,
+                following: 0,
+                followers: 0,
+            }
         }
     },
     mounted() {
@@ -108,12 +74,12 @@ export default {
         },
 
         textButton() {
-            return this.isFollowing ? 'Deixar de seguir' : 'Seguir'
+            return this.userProfile.isFollowing ? 'Deixar de seguir' : 'Seguir'
         }
     },
     watch: {
         '$route.params'() {
-            this.render()
+            this.getProfile(this.user.id)
         }
     },
     methods: {
@@ -122,10 +88,10 @@ export default {
                     id: id
                 })
                 .then(response => {
-                    this.userToShow = response.data.user
-                    this.postsToShow = response.data.posts
-                    this.following = response.data.following
-                    this.followers = response.data.followers
+                    this.userProfile.userToShow = response.data.user
+                    this.userProfile.postsToShow = response.data.posts
+                    this.userProfile.following = response.data.following
+                    this.userProfile.followers = response.data.followers
                 })
         },
 
@@ -134,7 +100,7 @@ export default {
                 user_to: this.$route.params.userId
             })
                 .then(() => {
-                    this.isFollowing = !this.isFollowing
+                    this.userProfile.isFollowing = !this.userProfile.isFollowing
                 })
         },
 
@@ -144,7 +110,7 @@ export default {
             })
                 .then(response => {
                     if (response.data.flag) {
-                        this.isFollowing = true
+                        this.userProfile.isFollowing = true
                     }
                 })
         }
@@ -217,49 +183,6 @@ export default {
                     color: #999;
                 }
             }
-        }
-    }
-
-    .content {
-        display: flex;
-        gap: 10px;
-
-        .column {
-            width: 250px;
-
-            .box {
-                background: #fff;
-                border: 1px solid #c9cacc;
-                border-radius: 5px;
-                margin-bottom: 10px;
-                padding: 8px;
-
-                .header {
-                    display: flex;
-                    justify-content: space-between;
-                    font-size: 13px;
-                    padding: 10px;
-
-                    a {
-                        text-decoration: none;
-                        color: #999;
-                    }
-                }
-                
-                .line {
-                    text-align: left;
-                    padding: 10px 10px;
-                    display: flex;
-                    align-items: center;
-                    gap: 20px;
-                    font-size: 13px;
-                    color: #819db9;
-                }
-            }
-        }
-
-        .posts {
-            flex: 1;
         }
     }
 }

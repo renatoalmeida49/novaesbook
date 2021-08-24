@@ -4,6 +4,10 @@ import TheLayout from '../views/pages/TheLayout'
 import Home from '../views/pages/home'
 import Settings from '../views/pages/settings'
 import Profile from '../views/pages/profile'
+
+import HomeProfile from '../views/pages/profile/home'
+import Friends from '../views/pages/profile/friends'
+
 import Login from '../views/pages/login'
 import NotFound from '../views/pages/NotFound'
 
@@ -36,14 +40,28 @@ const routes = [
       },
       {
         path: 'profile',
-        name: 'Profile',
         component: Profile,
         children: [
           {
+            path: '',
+            name: 'Profile',
+            component: HomeProfile
+          },
+          {
+            path: 'friends',
+            name: 'UserFriends',
+            component: Friends
+          },
+          {
             path: ':userId',
             name: 'UserProfile',
-            component: Profile,
-          }
+            component: HomeProfile
+          },
+          {
+            path: ':userId/friends',
+            name: 'UserFriends',
+            component: Friends
+          },
         ]
       },
     ]

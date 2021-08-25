@@ -78,11 +78,11 @@ npm install
 ```
 - Será necessário adicionar um novo host no arquivo de hosts de sua máquina.    
 
-Linux/Mac:  
+**Linux/Mac:**  
 1. No terminal digite ```sudo nano etc/hosts```  
 2. No arquivo que será aberto adicione ao final dele a linha ```127.0.0.1       novaesbook.local.com.br```  
 
-Windows:
+**Windows:**
 1. Abra um editor de texto no modo administrador
 2. Procure pelo arquivo ```C:\Windows\System32\drivers\etc\hosts```
 3. Adicione a linha ```127.0.0.1       novaesbook.local.com.br```   

@@ -5,7 +5,9 @@
         <div class="profile-info">
             <div class="photo-name">
                 <img src="@/assets/images/default-avatar.jpg" width="50" height="50" alt="Profile picture">
-                <p class="name">{{ userProfile.userToShow.name }}</p>
+                <router-link :to="{ name: 'UserProfile', params: { userId: userProfile.userToShow.id } }">
+                    <p class="name">{{ userProfile.userToShow.name }}</p>
+                </router-link>
             </div>
 
             <div class="numbers">
@@ -166,6 +168,10 @@ export default {
                 .name {
                     color: #000;
                     font-size: 20px;
+                }
+
+                a {
+                    text-decoration: none;
                 }
             }
 

@@ -3,7 +3,7 @@
       <div class="container">
           <div class="logo">
             <router-link :to="{ name: 'Home'}">
-                <img src="@/assets/devsbook_logo.png" alt="Logo">
+                <img src="@/assets/novaesbook_logo.png" alt="Logo">
             </router-link>
           </div>
 
@@ -67,12 +67,12 @@ header {
         margin: auto;
 
         .logo {
-            width: 200px;
+            width: 250px;
             display: flex;
             align-items: center;
 
             img {
-                height: 20px;
+                height: 25px;
             }
         }
 

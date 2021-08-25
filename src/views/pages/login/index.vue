@@ -2,7 +2,7 @@
 <div>
   <header>
       <div class="container">
-          <img src="@/assets/devsbook_logo.png" height="20" alt="Logo Devsbook">
+          <img src="@/assets/novaesbook_logo.png" height="30" alt="Logo Novaesbook">
       </div>
   </header>
   

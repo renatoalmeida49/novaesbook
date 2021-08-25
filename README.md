@@ -76,9 +76,17 @@ Com a API rodando em sua máquina local, prossiga para os passos seguintes:
 ```
 npm install
 ```
-- Será necessário adicionar um novo host no arquivo de hosts de sua máquina.  
-1. No Linux abra um terminal e digite ```sudo nano etc/hosts```  
-2. No arquivo que será aberto adicione ao final dele a linha ```127.0.0.1       novaesbook.local.com.br```
+- Será necessário adicionar um novo host no arquivo de hosts de sua máquina.    
+
+* Linux/Mac  
+  1. No terminal digite ```sudo nano etc/hosts```  
+  2. No arquivo que será aberto adicione ao final dele a linha ```127.0.0.1       novaesbook.local.com.br```  
+
+* Windows
+  1. Abra um editor de texto no modo administrador
+  2. Procure pelo arquivo ```C:\Windows\System32\drivers\etc\hosts```
+  3. Adicione a linha ```127.0.0.1       novaesbook.local.com.br```   
+
 - Com esses passos feitos, estará tudo pronto para rodar o projeto. Execute o comando:
 ```
 npm run serve
@@ -94,3 +102,4 @@ npm run serve
   
 * **Rafael Rodrigues** - O cara que sempre me leva pra o próximo nível de Vue e de NodeJS.
 * **Bonieky** - Ele mesmo da B7Web. Que fez todo esse projeto com PHP no seu curso.
+* **Thiago Vilasboas** - Olho clínico para achar melhorias na UI/UX.

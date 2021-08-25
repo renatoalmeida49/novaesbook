@@ -68,7 +68,7 @@ A preocupação com o uso de recursos do backend também é levada em conta, bus
 ## :arrow_forward: Como executar o projeto  
   
 Para rodar o projeto em ambiente de desenvolvimento, primeiro você deve subir a API da aplicação.
-Você pode encontrar a API e como a executar [nesse link]().  
+Você pode encontrar a API e como a executar [nesse link](https://github.com/renatoalmeida49/novaesbook-api).  
   
 Com a API rodando em sua máquina local, prossiga para os passos seguintes:  
   

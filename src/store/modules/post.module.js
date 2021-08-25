@@ -1,8 +1,12 @@
 import { api } from '../../services/api'
 
-const state = {
-    userPosts: []
+const getDefaultState = () => {
+    return {
+        userPosts: []
+    }
 }
+
+const state = getDefaultState()
 
 const mutations = {
     myPosts(state, payload) {
@@ -10,6 +14,9 @@ const mutations = {
     },
     newPost(state, payload) {
         state.userPosts.push(payload.post)
+    },
+    resetState(state) {
+        Object.assign(state, getDefaultState())
     }
 }
 
@@ -48,6 +55,9 @@ const actions = {
             .catch(erro => {
                 console.log("Erro in new post: ", erro)
             })
+    },
+    resetPosts(context) {
+        context.commit('resetState')
     }
 }
 

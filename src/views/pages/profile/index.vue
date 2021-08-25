@@ -59,7 +59,6 @@ export default {
     mounted() {
         if(this.$route.params.userId) {
             this.getProfile(this.$route.params.userId)
-            this.getRelation()
         } else {
             this.getProfile(this.user.id)
         }
@@ -92,25 +91,29 @@ export default {
     },
     watch: {
         '$route.params'() {
-            if (this.$route.params.userId) {
-                this.getProfile(this.$route.params.userId)
-                this.getRelation()
-            } else {
-                this.getProfile(this.user.id)
-            }
+            this.getProfile(this.$route.params.userId)
         }
     },
     methods: {
         getProfile(id) {
-            api.post('/users/profile', {
-                    id: id
-                })
-                .then(response => {
-                    this.userProfile.userToShow = response.data.user
-                    this.userProfile.postsToShow = response.data.posts
-                    this.userProfile.following = response.data.following
-                    this.userProfile.followers = response.data.followers
-                })
+            if (id != this.user.id) {
+                api.post('/users/profile', {
+                        id: id
+                    })
+                    .then(response => {
+                        this.userProfile.userToShow = response.data.user
+                        this.userProfile.postsToShow = response.data.posts
+                        this.userProfile.following = response.data.following
+                        this.userProfile.followers = response.data.followers
+
+                        this.getRelation()
+                    })
+            } else {
+                this.userProfile.userToShow = this.user
+                this.userProfile.postsToShow = this.posts
+                this.userProfile.following = 0
+                this.userProfile.followers = 0
+            }
         },
 
         relation() {

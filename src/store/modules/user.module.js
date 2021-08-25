@@ -1,17 +1,21 @@
 import { api } from '../../services/api'
+import store from '../index'
 
-const state = {
-    token: localStorage.getItem('token') || '',
-    user: {}
+const getDefaultState = () => {
+    return {
+        token: localStorage.getItem('token') || '',
+        user: {}
+    }
 }
+
+const state = getDefaultState()
 
 const mutations = {
     login(state, payload) {
         state.user = payload.user
     },
     logout(state) {
-        state.token = '',
-        state.user = ''
+        Object.assign(state, getDefaultState())
     },
 }
 
@@ -31,13 +35,15 @@ const actions = {
             payload.user = user
   
             context.commit('login', payload)
+            store.dispatch('post/getMyPosts')
           })
         
     },
     logout(context) {
         localStorage.removeItem('token')
 
-        context.commit('logout',)
+        context.commit('logout')
+        store.dispatch('post/resetPosts')
     },
     async update(context, payload) {
         await api.put('/users/update', {

@@ -59,11 +59,11 @@ A preocupação com o uso de recursos do backend também é levada em conta, bus
   
 ## :satellite: Futuras implementações  
   
-:white_medium_square: Fotos de perfil e de capa
-:white_medium_square: Envio de mensagens entre usuários
-:white_medium_square: Animações e transições
-:white_medium_square: Recuperação de senha
-:white_medium_square: Validação de e-mail de usuário  
+:white_medium_square: Fotos de perfil e de capa  
+:white_medium_square: Envio de mensagens entre usuários  
+:white_medium_square: Animações e transições  
+:white_medium_square: Recuperação de senha  
+:white_medium_square: Validação de e-mail de usuário    
 
 ## :arrow_forward: Como executar o projeto  
   

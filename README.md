@@ -36,7 +36,7 @@ Então me veio a ideia de refatorar todo o projeto Devsbook feito em PHP para um
 
 ### Links
 
-- Projeto online: [Netlify](https://ecstatic-jennings-4d87c0.netlify.app/login)  
+- Projeto online: [Netlify](https://ecstatic-jennings-4d87c0.netlify.app)  
   
 ## :pencil2: Meu processo  
   

@@ -14,13 +14,13 @@
                 </button>
 
                 <div>
-                    <router-link :to="{ name: 'Friends' }">
+                    <router-link :to="{ name: 'Friends', query: { list: 'followers'}, params: { userId: getParam }  }">
                         <span>{{ userProfile.followers.length }}</span>
                         <p>Seguidores</p>
                     </router-link>
                 </div>
                 <div>
-                    <router-link :to="{ name: 'Friends' }">
+                    <router-link :to="{ name: 'Friends', query: { list: 'following' }, params: { userId: getParam } }">
                         <span>{{ userProfile.following.length }}</span>
                         <p>Seguindo</p>
                     </router-link>
@@ -82,6 +82,10 @@ export default {
 
         textButton() {
             return this.userProfile.isFollowing ? 'Deixar de seguir' : 'Seguir'
+        },
+
+        getParam() {
+            return this.$route.params.userId
         }
     },
     watch: {

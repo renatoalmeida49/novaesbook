@@ -1,11 +1,11 @@
 <template>
   <div class="friend-list">
       <template v-for="(friend, index) in friends">
-            <router-link :key="index" :to="{ name: 'UserProfile', params: { userId: friend.to.id} }">
-                <div class="card">
-                    <img :src="getImage(friend.to.avatar)" class="user-avatar" alt="User avatar" width="50" height="50">
+            <router-link :key="index" class="card" :to="{ name: 'UserProfile', params: { userId: friend.id} }">
+                <div>
+                    <img :src="getImage(friend.avatar)" class="user-avatar" alt="User avatar" width="50" height="50">
 
-                    <p>{{ friend.to.name }}</p>
+                    <p>{{ friend.name }}</p>
                 </div>
             </router-link>
       </template>
@@ -36,6 +36,9 @@ export default {
 
     .card {
         flex-basis: 30%;
+        text-decoration: none;
+        font-size: 13px;
+
         .user-avatar {
             border-radius: 50%;
         }

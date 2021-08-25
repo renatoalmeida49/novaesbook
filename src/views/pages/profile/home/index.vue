@@ -12,7 +12,7 @@
                     <a href="">Ver todos</a>
                 </div>
                 
-                <FriendsList :friends="user.following" />
+                <FriendsList :friends="userFollowing" />
             </div>
         </div>
 
@@ -41,6 +41,13 @@ export default {
         FriendsList
     },
     props: ['user'],
+    computed: {
+        userFollowing() {
+            return Array.from(this.user.following).map(user => {
+                return user.to
+            })
+        }
+    }
 }
 </script>
 

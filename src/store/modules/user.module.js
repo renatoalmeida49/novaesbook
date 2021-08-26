@@ -35,8 +35,15 @@ const actions = {
             payload.user = user
   
             context.commit('login', payload)
-            store.dispatch('post/getMyPosts')
           })
+
+        const user = await api.get('/users/')
+        
+        store.dispatch('post/getMyPosts', user.data.posts)
+        store.dispatch('relation/getMyRelations', {
+            followers: user.data.followers,
+            following: user.data.following
+        })
         
     },
     logout(context) {
@@ -44,6 +51,7 @@ const actions = {
 
         context.commit('logout')
         store.dispatch('post/resetPosts')
+        store.dispatch('relation/resetRelation')
     },
     async update(context, payload) {
         await api.put('/users/update', {

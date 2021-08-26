@@ -1,3 +1,5 @@
+import { api } from '../../services/api'
+
 const getDefaultState = () => {
     return {
         followers: [],
@@ -14,6 +16,14 @@ const mutations = {
     following(state, payload) {
         state.following = payload
     },
+    newFollowing(state, payload) {
+        state.following.push(payload)
+    },
+    removeFollowing(state, payload) {
+        state.following = state.following.filter(user => {
+            return user.id != payload.id
+        })
+    },
     resetRelation(state) {
         Object.assign(state, getDefaultState())
     }
@@ -26,6 +36,18 @@ const actions = {
     },
     resetRelation(context) {
         context.commit('resetRelation')
+    },
+    updateRelation(context, payload) {
+        api.put('/relations/', {
+            user_to: payload.id
+        })
+            .then(() => {
+                if (payload.flag) {
+                    context.commit('removeFollowing', payload.user)
+                } else {
+                    context.commit('newFollowing', payload.user)
+                }
+            })
     }
 }
 

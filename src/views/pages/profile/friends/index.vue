@@ -27,13 +27,11 @@ export default {
     components: {
       FriendsList
     },
+    props: ['user'],
     data() {
       return {
         usersList: []
       }
-    },
-    props: {
-      user: { type: Object, required: true},
     },
     created() {
       this.usersToShow()
@@ -63,13 +61,9 @@ export default {
     methods: {
       usersToShow() {
         if (this.$route.query.list == 'following') {
-          this.usersList = Array.from(this.user.following).map(item => {
-            return item.to
-          })
+          this.usersList = this.user.following
         } else {
-          this.usersList = Array.from(this.user.followers).map(item => {
-            return item.from
-          })
+          this.usersList = this.user.followers
         }
       }
     }

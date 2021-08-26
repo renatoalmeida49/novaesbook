@@ -35,12 +35,12 @@
         </div>
     </div>
 
-    <router-view :user="userProfile "/>
+    <router-view :user="userProfile"/>
 </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { api } from '@/services/api'
 
 export default {
@@ -66,6 +66,7 @@ export default {
     computed: {
         ...mapGetters('user', ['user']),
         ...mapGetters('post', ['posts']),
+        ...mapGetters('relation', ['following', 'followers']),
 
         getBackground() {
             return {
@@ -95,43 +96,50 @@ export default {
         }
     },
     methods: {
+        ...mapActions('relation', ['updateRelation']),
+        
         getProfile(id) {
-            if (id != this.user.id) {
+            if (id != this.user.id && id != null) {
                 api.post('/users/profile', {
                         id: id
                     })
                     .then(response => {
                         this.userProfile.userToShow = response.data.user
                         this.userProfile.postsToShow = response.data.posts
-                        this.userProfile.following = response.data.following
-                        this.userProfile.followers = response.data.followers
+                        this.userProfile.following = Array.from(response.data.following).map(item => {
+                            return item.to
+                        })
+                        this.userProfile.followers = Array.from(response.data.followers).map(item => {
+                            return item.from
+                        })
 
-                        this.getRelation()
+                        this.getRelation(id)
                     })
             } else {
                 this.userProfile.userToShow = this.user
                 this.userProfile.postsToShow = this.posts
-                this.userProfile.following = 0
-                this.userProfile.followers = 0
+                this.userProfile.following = this.following
+                this.userProfile.followers = this.followers
             }
         },
 
         relation() {
-            api.put('/relations/', {
-                user_to: this.$route.params.userId
+            this.updateRelation({
+                id: this.$route.params.userId,
+                user: this.userProfile.userToShow,
+                flag: this.userProfile.isFollowing
             })
                 .then(() => {
                     this.userProfile.isFollowing = !this.userProfile.isFollowing
                 })
         },
 
-        getRelation() {
-            api.post('/relations/', {
-                user_to: this.$route.params.userId
+        getRelation(id) {
+            const search = this.following.filter(user => {
+                return user.id == id
             })
-                .then(response => {
-                    this.userProfile.isFollowing = response.data.flag
-                })
+
+            search.length == 0 ? this.userProfile.isFollowing = false : this.userProfile.isFollowing = true
         }
     }
 }

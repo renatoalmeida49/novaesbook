@@ -41,8 +41,12 @@ const actions = {
         
         store.dispatch('post/getMyPosts', user.data.posts)
         store.dispatch('relation/getMyRelations', {
-            followers: user.data.followers,
-            following: user.data.following
+            followers: Array.from(user.data.followers).map(follower => {
+                return follower.from
+            }),
+            following: Array.from(user.data.following).map(follow => {
+                return follow.to
+            })
         })
         
     },

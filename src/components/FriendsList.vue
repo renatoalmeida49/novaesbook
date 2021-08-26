@@ -1,5 +1,5 @@
 <template>
-  <div class="friend-list">
+  <div class="friend-list" v-if="friends[0]">
       <template v-for="(friend, index) in friends">
             <router-link :key="index" class="card" :to="{ name: 'UserProfile', params: { userId: friend.id} }">
                 <div>

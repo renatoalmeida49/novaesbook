@@ -69,6 +69,7 @@ export default {
 .aside {
     width: 190px;
     text-align: left;
+    position: fixed;
 
     .nav {
         ul {

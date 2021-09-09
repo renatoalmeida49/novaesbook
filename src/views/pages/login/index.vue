@@ -18,12 +18,16 @@
             type="email"
             placeholder="Digite seu e-mail"
             v-model="credentials.email"
+            :class="error"
         >
+
+        <span class="error-message" :class="error">E-mail ou senha incorretos</span>
 
         <input
             type="password"
             placeholder="Digite sua senha"
             v-model="credentials.password"
+            :class="error"
         >
 
         <input
@@ -83,7 +87,13 @@ export default {
                 email: '',
                 password: ''
             },
-            newAccountFlag: false
+            newAccountFlag: false,
+            showError: false
+        }
+    },
+    computed: {
+        error() {
+            return {'error' : this.showError}
         }
     },
     methods: {
@@ -95,6 +105,8 @@ export default {
             if (localStorage.getItem('token') != null) {
                 this.$router.push({ name: 'Home'})
             }
+
+            this.showError = true
         },
 
         newAccount() {
@@ -154,6 +166,20 @@ header {
         background: #EEE;
         border: none;
         outline: none;
+
+        &.error {
+            border: 1px solid red;
+        }
+    }
+
+    .error-message {
+        margin-bottom: 10px;
+        display: none;
+        color: red;
+
+        &.error {
+            display: block;
+        }
     }
 
     .btn-access {

@@ -42,7 +42,7 @@ export default {
     margin: auto;
     justify-content: space-between;
     gap: 10px;
-    margin-top: 10px;
+    margin-top: 55px;
 
     .view {
         display: flex;

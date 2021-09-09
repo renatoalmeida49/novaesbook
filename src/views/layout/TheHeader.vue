@@ -13,7 +13,9 @@
               </div>
 
               <div class="right">
-                  <p class="user-name">{{ user.name }}</p>
+                  <router-link :to="{ name: 'Profile'}">
+                    <p class="user-name">{{ user.name }}</p>
+                  </router-link>
                   <img :src="getImage" width="24" height="24" alt="Avatar">
                   <button class="logout" @click="submitLogout">
                       <img src="@/assets/icons/power_white.png" width="18" height="18" alt="Logout">
@@ -24,11 +26,14 @@
   </header>
 </template>
 
+
 <script>
+
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
     name: "TheHeader",
+
     computed: {
         ...mapGetters('user', ['user']),
 
@@ -40,6 +45,7 @@ export default {
             }
         }
     },
+
     methods: {
         ...mapActions('user', ['logout']),
 
@@ -50,6 +56,7 @@ export default {
         }
     }
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -57,7 +64,10 @@ header {
     background-color: #4a76a8;
     height: 45px;
     box-shadow: 0px 0px 4px #333;
-    position: relative;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
     z-index: 99;
 
     .container {
@@ -107,6 +117,10 @@ header {
             .right {
                 display: flex;
                 align-items: center;
+
+                a {
+                    text-decoration: none;
+                }
 
                 .user-name {
                     color: #fff;

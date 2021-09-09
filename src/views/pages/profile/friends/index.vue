@@ -11,10 +11,6 @@
         </ul>
       </nav>
 
-      <div>
-
-      </div>
-
       <FriendsList :friends="usersList"/>
   </div>
 </template>

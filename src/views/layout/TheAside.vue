@@ -15,7 +15,7 @@
                 </router-link>
             </li>
             <li>
-                <router-link :to="{ path: '/friends'}">
+                <router-link :to="{ name: 'Friends', query: { list: 'followers'} }">
                     <img src="@/assets/icons/friends.png" width="16" height="16" alt="Home icon">
                     Amigos
                 </router-link>

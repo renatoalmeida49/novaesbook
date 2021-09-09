@@ -28,6 +28,7 @@
             placeholder="Digite sua senha"
             v-model="credentials.password"
             :class="error"
+            @keyup.enter="submitLogin()"
         >
 
         <input

@@ -6,20 +6,6 @@
 
 </template>
 
-
-<script>
-
-export default {
-   watch: {
-    $route() {
-      document.title = this.$route.meta.title || 'Novaesbook';
-    }
-  }
-}
-
-</script>
-
-
 <style lang="scss">
 
 * {

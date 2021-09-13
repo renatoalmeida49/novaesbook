@@ -106,7 +106,11 @@ export default {
         ...mapActions('user', ['login']),
 
         async submitLogin() {
+            this.loading = true
+
             await this.login(this.credentials)
+
+            this.loading = false
                 
             if (localStorage.getItem('token') != null) {
                 this.$router.push({ name: 'Home'})

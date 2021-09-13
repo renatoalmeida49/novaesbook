@@ -35,10 +35,16 @@ const actions = {
             payload.user = user
   
             context.commit('login', payload)
+            context.dispatch('profile')
           })
-
-        const user = await api.get('/users/')
+          .catch(() => {
+              console.log("Erro de autentição!")
+          })
         
+    },
+    async profile() {
+        const user = await api.get('/users/')
+
         store.dispatch('post/getMyPosts', user.data.posts)
         store.dispatch('relation/getMyRelations', {
             followers: Array.from(user.data.followers).map(follower => {
@@ -48,7 +54,6 @@ const actions = {
                 return follow.to
             })
         })
-        
     },
     logout(context) {
         localStorage.removeItem('token')

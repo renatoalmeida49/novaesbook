@@ -21,7 +21,11 @@ instance.interceptors.response.use(response => {
     if (error.response.status === 401) {
         store.dispatch('user/logout')
         router.push('/login')
-      }
+    }
+
+    if (error.response.status === 403) {
+        console.log('Login ou senha incorretos.')
+    }
     return error
 })
 

@@ -1,4 +1,5 @@
 <template>
+
 <div>
     <TheHeader />
 
@@ -12,29 +13,39 @@
         <TheColumn v-if="showColumn" />
     </section>
 </div>
+
 </template>
 
+
 <script>
+
 import TheHeader from "@/views/layout/TheHeader"
 import TheAside from "@/views/layout/TheAside"
 import TheColumn from "@/views/layout/TheColumn"
 
 export default {
+
     name: "TheLayout",
+
     components: {
         TheHeader,
         TheAside,
         TheColumn
     },
+
     computed: {
         showColumn() {
             return !this.$route.path.includes('/profile') 
         }
     }
+
 }
+
 </script>
 
+
 <style lang="scss" scoped>
+
 #content {
     display: flex;
     height: inherit;
@@ -51,4 +62,5 @@ export default {
         margin-left: 200px;
     }
 }
+
 </style>

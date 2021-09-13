@@ -17,7 +17,10 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: {
+      title: 'Login - Novaesbook'
+    }
   },
   {
     path: '/',
@@ -31,12 +34,18 @@ const routes = [
       {
         path: 'home',
         name: 'Home',
-        component: Home
+        component: Home,
+        meta: {
+          title: 'Home - Novaesbook'
+        }
       },
       {
         path: 'settings',
         name: 'Settings',
-        component: Settings
+        component: Settings,
+        meta: {
+          title: 'Configurações - Novaesbook'
+        }
       },
       {
         path: 'profile',

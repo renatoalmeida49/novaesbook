@@ -1,10 +1,27 @@
 <template>
+
   <div id="app">
     <router-view/>
   </div>
+
 </template>
 
+
+<script>
+
+export default {
+   watch: {
+    $route() {
+      document.title = this.$route.meta.title || 'Novaesbook';
+    }
+  }
+}
+
+</script>
+
+
 <style lang="scss">
+
 * {
   padding: 0;
   margin: 0;
@@ -22,4 +39,5 @@ html {
   background: #edeef0;
   min-height: 100vh;
 }
+
 </style>

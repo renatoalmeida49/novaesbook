@@ -5,6 +5,10 @@
           <img src="@/assets/novaesbook_logo.png" height="30" alt="Logo Novaesbook">
       </div>
   </header>
+
+  <div class="loading" v-if="loading">
+      <div class="loader"></div>
+  </div>
   
     <div class="form-login">
         <input
@@ -89,7 +93,8 @@ export default {
                 password: ''
             },
             newAccountFlag: false,
-            showError: false
+            showError: false,
+            loading: false
         }
     },
     computed: {
@@ -147,6 +152,32 @@ header {
         height: inherit;
         justify-content: center;
         align-items: center;
+    }
+}
+
+.loading {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .loader {
+        height: 150px;
+        width: 150px;
+        border: 8px solid white;
+        border-radius: 50%;
+        border-top: 8px solid #4a76a8;
+        animation: spin 2s infinite;
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     }
 }
 

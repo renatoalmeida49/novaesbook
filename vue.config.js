@@ -1,7 +1,7 @@
 module.exports = {
     devServer: {
-        host: 'novaesbook.local.com.br',
-        port: 4545,
+        host: 'localhost',
+        port: 3131,
         https: false
     }
 }

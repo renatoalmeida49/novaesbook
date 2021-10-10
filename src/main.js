@@ -7,7 +7,7 @@ import './common/utils/filters'
 
 Vue.config.productionTip = false
 
-Vue.prototype.$http = api
+Vue.prototype.$api = api
 
 new Vue({
   router,

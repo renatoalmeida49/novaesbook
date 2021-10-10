@@ -193,7 +193,7 @@ export default {
                 .button-relation {
                     border: 0;
                     padding: 10px 20px;
-                    background-color: #4a76a8;
+                    background-color: $primary-color;
                     border-radius: 10px;
                     color: #FFF;
                     font-size: 15px;

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import TheLayout from '../views/pages/TheLayout'
 import Home from '../views/pages/home'
 import Settings from '../views/pages/settings'
 import Profile from '../views/pages/profile'
@@ -25,7 +24,7 @@ const routes = [
   {
     path: '/',
     name: 'TheLayout',
-    component: TheLayout,
+    component: () => import("@/views/layout/index.vue"),
     redirect: '/home',
     meta: {
       requiresAuth: true

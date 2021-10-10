@@ -8,7 +8,6 @@ import HomeProfile from '../views/pages/profile/home'
 import Friends from '../views/pages/profile/friends'
 
 import Login from '../views/pages/login'
-import NotFound from '../views/pages/NotFound'
 
 Vue.use(VueRouter)
 
@@ -24,7 +23,7 @@ const routes = [
   {
     path: '/',
     name: 'TheLayout',
-    component: () => import("@/views/layout/index.vue"),
+    component: () => import('@/views/layout/index.vue'),
     redirect: '/home',
     meta: {
       requiresAuth: true
@@ -75,9 +74,12 @@ const routes = [
     ]
   },
   {
-    path: '*',
+    path: '/404',
     name: '404',
-    component: NotFound
+    component: () => import('@/views/error/404.vue')
+  },
+  {
+    path: '*', redirect: '/404'
   }
 ]
 

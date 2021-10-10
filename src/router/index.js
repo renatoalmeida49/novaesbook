@@ -1,13 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/pages/home'
-import Settings from '../views/pages/settings'
-import Profile from '../views/pages/profile'
-
-import HomeProfile from '../views/pages/profile/home'
-import Friends from '../views/pages/profile/friends'
-
-import Login from '../views/pages/login'
 
 Vue.use(VueRouter)
 
@@ -15,7 +7,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login,
+    component: () => import('@/views/pages/login/index.vue'),
     meta: {
       title: 'Login - Novaesbook'
     }
@@ -32,7 +24,7 @@ const routes = [
       {
         path: 'home',
         name: 'Home',
-        component: Home,
+        component: () => import('@/views/pages/home/index.vue'),
         meta: {
           title: 'Home - Novaesbook'
         }
@@ -40,34 +32,34 @@ const routes = [
       {
         path: 'settings',
         name: 'Settings',
-        component: Settings,
+        component: () => import('@/views/pages/settings/index.vue'),
         meta: {
           title: 'Configurações - Novaesbook'
         }
       },
       {
         path: 'profile',
-        component: Profile,
+        component: () => import('@/views/pages/profile/index.vue'),
         children: [
           {
             path: '',
             name: 'Profile',
-            component: HomeProfile
+            component: () => import('@/views/pages/profile/home/index.vue')
           },
           {
             path: 'friends',
             name: 'Friends',
-            component: Friends
+            component: () => import('@/views/pages/profile/friends/index.vue')
           },
           {
             path: ':userId',
             name: 'UserProfile',
-            component: HomeProfile
+            component: () => import('@/views/pages/profile/home/index.vue')
           },
           {
             path: ':userId/friends',
             name: 'UserFriends',
-            component: Friends
+            component: () => import('@/views/pages/profile/friends/index.vue')
           },
         ]
       },

@@ -14,7 +14,7 @@
   box-sizing: border-box;
 }
 html {
-  background: #edeef0;
+  background: $background-color;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -22,7 +22,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background: #edeef0;
+  background: $background-color;
   min-height: 100vh;
 }
 

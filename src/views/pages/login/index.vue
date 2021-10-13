@@ -109,18 +109,17 @@ export default {
   },
 
   methods: {
-    ...mapActions('user', ['login']),
+    ...mapActions('user',['login']),
 
     async submitLogin() {
       this.loading = true
 
-      await this.login(this.credentials)
+      this.login(this.credentials)
+        .then(() => {
+          this.$router.push({ name: 'Home'})
+        })
 
       this.loading = false
-          
-      if (localStorage.getItem('token') != null) {
-        this.$router.push({ name: 'Home'})
-      }
 
       this.showError = true
     },

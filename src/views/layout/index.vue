@@ -1,6 +1,6 @@
 <template>
-
-  <div>
+  <div v-if="isAuthenticaded">
+    <p></p>
     <TheHeader />
 
     <section id="content">
@@ -13,7 +13,6 @@
       <TheColumn v-if="showColumn" />
     </section>
   </div>
-
 </template>
 
 
@@ -33,7 +32,16 @@ export default {
     TheColumn
   },
 
+  mounted() {
+    if (!this.isAuthenticaded) {
+      this.$router.push({ name: 'Login' } )
+    }
+  },
+
   computed: {
+    isAuthenticaded() {
+      return this.$store.getters['user/isAuthenticaded']
+    },
     showColumn() {
       return !this.$route.path.includes('/profile') 
     }

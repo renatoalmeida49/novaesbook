@@ -17,9 +17,6 @@ const routes = [
     name: 'TheLayout',
     component: () => import('@/views/layout/index.vue'),
     redirect: '/home',
-    meta: {
-      requiresAuth: true
-    },
     children: [
       {
         path: 'home',
@@ -89,23 +86,6 @@ const router = new VueRouter({
       y: 0,
       behavior: 'smooth'
     }
-  }
-})
-
-router.beforeEach((to, from, next) => {
-  document.title = to.meta.title || 'Novaesbook';
-
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    const loggedIn = localStorage.getItem('token')
-
-    if (loggedIn) {
-      next()
-      return
-    }
-
-    next('/login')
-  } else {
-    next()
   }
 })
 

@@ -1,6 +1,4 @@
 import axios from 'axios'
-import router from '../router'
-import store from '../store'
 
 const instance = axios.create({
     baseURL: process.env.VUE_APP_API,
@@ -18,11 +16,6 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(response => {
     return response
 }, error => {
-    if (error.response.status === 401) {
-        store.dispatch('user/logout')
-        router.push('/login')
-    }
-
     if (error.response.status === 403) {
         console.log('Login ou senha incorretos.')
     }

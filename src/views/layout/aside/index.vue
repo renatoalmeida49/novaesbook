@@ -51,18 +51,16 @@
 
 <script>
 
-import { mapActions } from 'vuex'
+import { LOGOUT } from '@/store/modules/user.module'
 
 export default {
   name: "TheAside",
 
   methods: {
-    ...mapActions('user', ['logout']),
-
     submitLogout(event) {
       event.preventDefault()
         
-      this.logout()
+      this.$store.dispatch(LOGOUT)
 
       this.$router.push({ name: 'Login' })
     }
@@ -75,51 +73,51 @@ export default {
 <style lang="scss">
 
 .aside {
-    width: 190px;
-    text-align: left;
-    position: fixed;
+  width: 190px;
+  text-align: left;
+  position: fixed;
 
-    .nav {
-        ul {
-            list-style: none;
+  .nav {
+    ul {
+      list-style: none;
 
-            li {
-                padding: 5px;
-                margin-bottom: 2px;
-                cursor: pointer;
-                border: 1px solid transparent;
-                display: flex;
-                align-items: center;
+      li {
+        padding: 5px;
+        margin-bottom: 2px;
+        cursor: pointer;
+        border: 1px solid transparent;
+        display: flex;
+        align-items: center;
 
-                a {
-                    text-decoration: none;
-                    color: #224b7a;
-                    padding: 5px;
-                    display: block;
-                    width: 100%;
+        a {
+          text-decoration: none;
+          color: #224b7a;
+          padding: 5px;
+          display: block;
+          width: 100%;
 
-                    &.router-link-exact-active {
-                        background-color: #d1d9e0;
-                        border: 1px solid #CCC;
-                    }
-                }
-
-                &:hover {
-                    background-color: #d1d9e0;
-                    border: 1px solid #CCC;
-                }
-
-                img {
-                    margin-right: 5px;
-                }
-            }
-
-            .spliter {
-                border: 1px solid #ccc;
-                margin: 5px 0;
-            }
+          &.router-link-exact-active {
+            background-color: #d1d9e0;
+            border: 1px solid #CCC;
+          }
         }
+
+        &:hover {
+          background-color: #d1d9e0;
+          border: 1px solid #CCC;
+        }
+
+        img {
+          margin-right: 5px;
+        }
+      }
+
+      .spliter {
+        border: 1px solid #ccc;
+        margin: 5px 0;
+      }
     }
+  }
 }
 
 </style>

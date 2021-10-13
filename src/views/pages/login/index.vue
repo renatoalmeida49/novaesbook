@@ -81,7 +81,7 @@
 
 <script>
 
-import { mapActions } from 'vuex'
+import { LOGIN } from '@/store/modules/user.module'
 
 export default {
   name: "Login",
@@ -109,12 +109,10 @@ export default {
   },
 
   methods: {
-    ...mapActions('user',['login']),
-
     async submitLogin() {
       this.loading = true
 
-      this.login(this.credentials)
+      this.$store.dispatch(LOGIN, this.credentials)
         .then(() => {
           this.$router.push({ name: 'Home'})
         })

@@ -1,6 +1,11 @@
 import { api } from '../../services/api'
 import store from '../index'
 
+// MUTATIONS
+
+export const LOGIN = 'login'
+export const LOGOUT = 'logout'
+
 const getDefaultState = () => {
   return {
     token: localStorage.getItem('token') || '',
@@ -23,7 +28,7 @@ const mutations = {
 }
 
 const actions = {
-  login(context, payload) {
+  [LOGIN](context, payload) {
     return new Promise((resolve, reject) => {
       api.post('/users/sign-in', {
         email: payload.email,
@@ -59,7 +64,7 @@ const actions = {
     })
   },
 
-  logout(context) {
+  [LOGOUT](context) {
     localStorage.removeItem('token')
 
     context.commit('logout')
@@ -113,7 +118,6 @@ const getters = {
 }
 
 export default {
-  namespaced: true,
   state,
   mutations,
   actions,

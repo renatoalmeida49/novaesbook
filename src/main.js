@@ -13,7 +13,7 @@ router.beforeEach((to, from, next) => {
   document.title = to.meta.title || 'Novaesbook';
 
   Promise.all([
-    store.dispatch('user/verifyAuth')
+    store.dispatch('verifyAuth')
   ])
     .then(() => {
       next()

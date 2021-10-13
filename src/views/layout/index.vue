@@ -40,7 +40,7 @@ export default {
 
   computed: {
     isAuthenticaded() {
-      return this.$store.getters['user/isAuthenticaded']
+      return this.$store.getters.isAuthenticaded
     },
     showColumn() {
       return !this.$route.path.includes('/profile') 

@@ -31,13 +31,14 @@
 
 <script>
 
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
+import { LOGOUT } from '@/store/modules/user.module'
 
 export default {
   name: "TheHeader",
 
   computed: {
-    ...mapGetters('user', ['user']),
+    ...mapGetters(['user']),
 
     getImage() {
       if (this.user.avatar == '')
@@ -49,10 +50,8 @@ export default {
   },
 
   methods: {
-    ...mapActions('user', ['logout']),
-
     submitLogout() {
-      this.logout()
+      this.$store.dispatch(LOGOUT)
 
       this.$router.push({ name: 'Login' })
     }

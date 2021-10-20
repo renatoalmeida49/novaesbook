@@ -38,7 +38,6 @@ const actions = {
           localStorage.setItem('token', response.data.token)
 
           context.commit('login', response.data)
-          context.dispatch('profile')
 
           resolve(response.data)
         })
@@ -48,20 +47,6 @@ const actions = {
         })
     })
       
-  },
-
-  async profile() {
-    const user = await api.get('/users/')
-
-    store.dispatch('post/getMyPosts', user.data.posts)
-    store.dispatch('relation/getMyRelations', {
-      followers: Array.from(user.data.followers).map(follower => {
-        return follower.from
-      }),
-      following: Array.from(user.data.following).map(follow => {
-        return follow.to
-      })
-    })
   },
 
   [LOGOUT](context) {

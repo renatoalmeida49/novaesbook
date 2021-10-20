@@ -15,7 +15,7 @@
 
 <script>
 
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: "NewPost",
@@ -30,11 +30,13 @@ export default {
   },
 
   computed: {
+    ...mapGetters(['user']),
+    
     getImage() {
-      if (this.$store.getters.user.avatar == '')
+      if (this.user.avatar) {
+        return require(this.user.avatar)
+      } else {
         return require('@/assets/images/default-avatar.jpg')
-      else {
-        return require(this.$store.getters.user.avatar)
       }
     },
 

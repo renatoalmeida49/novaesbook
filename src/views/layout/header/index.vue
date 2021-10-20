@@ -41,10 +41,10 @@ export default {
     ...mapGetters(['user']),
 
     getImage() {
-      if (this.user.avatar == '')
-        return require('@/assets/images/default-avatar.jpg')
-      else {
+      if (this.user.avatar) {
         return require(this.user.avatar)
+      } else {
+        return require('@/assets/images/default-avatar.jpg')
       }
     }
   },

@@ -44,7 +44,7 @@
 
 <script>
 
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: "Profile",
@@ -70,9 +70,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('user', ['user']),
-    ...mapGetters('post', ['posts']),
-    ...mapGetters('relation', ['following', 'followers']),
+    ...mapGetters(['user']),
 
     getBackground() {
       return {
@@ -104,8 +102,6 @@ export default {
   },
 
   methods: {
-    ...mapActions('relation', ['updateRelation']),
-      
     getProfile(id) {
       if (id != this.user.id && id != null) {
         this.$api.post('/users/profile', {
@@ -124,30 +120,34 @@ export default {
             this.getRelation(id)
           })
       } else {
-        this.userProfile.userToShow = this.user
-        this.userProfile.postsToShow = this.posts
-        this.userProfile.following = this.following
-        this.userProfile.followers = this.followers
+        this.$api.post('/users/profile', {
+            id: this.user.id
+          })
+          .then(response => {
+            this.userProfile.userToShow = response.data.user
+            this.userProfile.postsToShow = response.data.posts
+            this.userProfile.following = Array.from(response.data.following).map(item => {
+              return item.to
+            })
+            this.userProfile.followers = Array.from(response.data.followers).map(item => {
+              return item.from
+            })
+
+            this.getRelation(id)
+          })
       }
     },
 
-    relation() {
-      this.updateRelation({
-        id: this.$route.params.userId,
-        user: this.userProfile.userToShow,
-        flag: this.userProfile.isFollowing
-      })
-        .then(() => {
-          this.userProfile.isFollowing = !this.userProfile.isFollowing
-        })
-    },
-
     getRelation(id) {
-      const search = this.following.filter(user => {
-        return user.id == id
+      this.$api.post('/relations', {
+        user_to: id
       })
-
-      search.length == 0 ? this.userProfile.isFollowing = false : this.userProfile.isFollowing = true
+        .then(response => {
+          if (response.flag) 
+            this.userProfile.isFollowing = true
+          else
+            this.userProfile.isFollowing = false
+        })
     }
   }
 }

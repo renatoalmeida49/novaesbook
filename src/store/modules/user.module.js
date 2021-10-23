@@ -55,24 +55,27 @@ const actions = {
     context.commit('logout')
   },
 
-  async update(context, payload) {
-    await api.put('/users/update', {
-      id: payload.id,
-      name: payload.name,
-      email: payload.email,
-      birthdate: payload.birthdate,
-      city: payload.city,
-      work: payload.work,
-    })
-      .then(response => {
-        const user = response.data.user
-
-        localStorage.setItem('user', user)
-
-        payload.user = user
-
-        context.commit('login', payload)
+  [UPDATE](context, payload) {
+    return new Promise((resolve, reject) => {
+      api.put('/users/update', {
+        id: payload.id,
+        name: payload.name,
+        email: payload.email,
+        birthdate: payload.birthdate,
+        city: payload.city,
+        work: payload.work,
       })
+        .then(response => {  
+          payload.user = response.data.user
+  
+          context.commit('login', payload)
+
+          resolve(response)
+        })
+        .catch(err => {
+          reject(err)
+        })
+    })
   },
 
   async verifyAuth(context) {
@@ -85,8 +88,8 @@ const actions = {
           context.commit('logout')
         })
     } else {
-        context.commit('logout')
-      }
+      context.commit('logout')
+    }
   }
 }
 

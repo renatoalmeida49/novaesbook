@@ -38,7 +38,8 @@
 
 <script>
 
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
+import { UPDATE } from '@/store/modules/user.module'
 
 export default {
   name: "Settings",
@@ -58,10 +59,8 @@ export default {
   },
 
   methods: {
-    ...mapActions(['update']),
-
     async submitUpdate() {
-      await this.update(this.userInfo)
+      await this.$store.dispatch(UPDATE, this.userInfo)
     }
   }
 }

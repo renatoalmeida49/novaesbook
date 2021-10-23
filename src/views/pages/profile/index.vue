@@ -12,7 +12,7 @@
         </div>
 
         <div class="numbers">
-          <button class="button-relation" v-if="checkButton" @click="relation">
+          <button class="button-relation" v-if="checkButton" @click="updateRelation">
             {{ textButton }}
           </button>
 
@@ -103,39 +103,21 @@ export default {
 
   methods: {
     getProfile(id) {
-      if (id != this.user.id && id != null) {
-        this.$api.post('/users/profile', {
-            id: id
+      this.$api.post('/users/profile', {
+          id: id
+        })
+        .then(response => {
+          this.userProfile.userToShow = response.data.user
+          this.userProfile.postsToShow = response.data.posts
+          this.userProfile.following = Array.from(response.data.following).map(item => {
+            return item.to
           })
-          .then(response => {
-            this.userProfile.userToShow = response.data.user
-            this.userProfile.postsToShow = response.data.posts
-            this.userProfile.following = Array.from(response.data.following).map(item => {
-              return item.to
-            })
-            this.userProfile.followers = Array.from(response.data.followers).map(item => {
-              return item.from
-            })
+          this.userProfile.followers = Array.from(response.data.followers).map(item => {
+            return item.from
+          })
 
-            this.getRelation(id)
-          })
-      } else {
-        this.$api.post('/users/profile', {
-            id: this.user.id
-          })
-          .then(response => {
-            this.userProfile.userToShow = response.data.user
-            this.userProfile.postsToShow = response.data.posts
-            this.userProfile.following = Array.from(response.data.following).map(item => {
-              return item.to
-            })
-            this.userProfile.followers = Array.from(response.data.followers).map(item => {
-              return item.from
-            })
-
-            this.getRelation(id)
-          })
-      }
+          this.getRelation(id)
+        })
     },
 
     getRelation(id) {
@@ -143,10 +125,19 @@ export default {
         user_to: id
       })
         .then(response => {
-          if (response.flag) 
+          if (response.data.flag) 
             this.userProfile.isFollowing = true
           else
             this.userProfile.isFollowing = false
+        })
+    },
+
+    updateRelation() {
+      this.$api.put('/relations', {
+        user_to: this.$route.params.userId
+      })
+        .then(() => {
+          this.userProfile.isFollowing = !this.userProfile.isFollowing
         })
     }
   }

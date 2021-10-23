@@ -50,15 +50,15 @@ export default {
   },
 
   mounted() {
-    this.userInfo = this.user
+    this.$set(this, "userInfo", Object.assign({}, this.user))
   },
 
   computed: {
-    ...mapGetters('user', ['user'])
+    ...mapGetters(['user'])
   },
 
   methods: {
-    ...mapActions('user', ['update']),
+    ...mapActions(['update']),
 
     async submitUpdate() {
       await this.update(this.userInfo)

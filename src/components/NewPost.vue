@@ -15,7 +15,7 @@
 
 <script>
 
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: "NewPost",
@@ -46,15 +46,14 @@ export default {
   },
 
   methods: {
-    ...mapActions('post', ['newPost']),
-
     async submitNewPost() {
-      await this.newPost({
+      this.$api.post('/posts/new-post', {
         type: this.post.type,
         body: this.post.body
       })
-          
-      this.post.body = ''
+        .then(() => {
+          this.post.body = ''
+        })
     }
   }
 }

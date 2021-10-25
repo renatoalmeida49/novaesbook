@@ -1,6 +1,5 @@
 <template>
   <div v-if="isAuthenticaded">
-    <p></p>
     <TheHeader />
 
     <section id="content">

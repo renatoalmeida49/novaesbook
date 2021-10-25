@@ -5,14 +5,6 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import('@/views/pages/login/index.vue'),
-    meta: {
-      title: 'Login - Novaesbook'
-    }
-  },
-  {
     path: '/',
     name: 'TheLayout',
     component: () => import('@/views/layout/index.vue'),
@@ -60,6 +52,23 @@ const routes = [
           },
         ]
       },
+    ]
+  },
+  {
+    path: '/',
+    name: 'Auth',
+    component: () => import('@/views/pages/auth/index.vue'),
+    children: [
+      {
+        path: '/login',
+        name: 'Login',
+        component: () => import('@/views/pages/auth/login/index.vue'),
+      },
+      {
+        path: '/register',
+        name: 'Register',
+        component: () => import('@/views/pages/auth/register/index.vue')
+      }
     ]
   },
   {

@@ -1,7 +1,7 @@
 <template>
   
   <div class="register">
-    <form class="form-login" @submit.prevent="submitNewAccount">
+    <form class="register__form" @submit.prevent="submitNewAccount">
       <h1 class="register__title">Crie sua conta</h1>
 
       <input
@@ -95,7 +95,7 @@ export default {
     font-size: 24px;
   }
 
-  .form-login {
+  &__form {
     background: #fff;
     display: flex;
     flex-direction: column;
@@ -112,20 +112,6 @@ export default {
       background: #EEE;
       border: none;
       outline: none;
-
-      &.error {
-        border: 1px solid red;
-      }
-    }
-
-    .error-message {
-      margin-bottom: 10px;
-      display: none;
-      color: red;
-
-      &.error {
-        display: block;
-      }
     }
 
     .btn-access {

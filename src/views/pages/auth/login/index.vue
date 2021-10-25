@@ -1,31 +1,46 @@
 <template>
   
   <div class="login">
-    <form class="login__form" @submit.prevent="submitLogin">
-      <h1 class="login__title">Acesse sua conta</h1>
+    <ValidationObserver>
+      <form class="login__form" @submit.prevent="submitLogin">
+        <h1 class="login__title">Acesse sua conta</h1>
 
-      <input
-        type="email"
-        placeholder="Digite seu e-mail"
-        v-model="credentials.email"
-        :class="error"
-      >
+        <ValidationProvider
+          v-slot="{ errors }"
+          rules="required|email"
+        >
+          <input
+            type="email"
+            placeholder="Digite seu e-mail"
+            v-model="credentials.email"
+            :class="error"
+          >
+          <span class="error">{{ errors[0] }}</span>
+        </ValidationProvider>
 
-      <input
-        type="password"
-        placeholder="Digite sua senha"
-        v-model="credentials.password"
-        :class="error"
-      >
 
-      <button class="btn-access">
-        Acessar
-      </button>
+        <ValidationProvider
+          v-slot="{ errors }"
+          rules="required"
+        >
+          <input
+            type="password"
+            placeholder="Digite sua senha"
+            v-model="credentials.password"
+            :class="error"
+          >
+          <span class="error">{{ errors[0] }}</span>
+        </ValidationProvider>
 
-      <router-link :to="{ name: 'Register' }" class="btn-new-access">
-        Ainda não tem conta? Cadastre-se
-      </router-link>
-    </form>
+        <button class="btn-access">
+          Acessar
+        </button>
+
+        <router-link :to="{ name: 'Register' }" class="btn-new-access">
+          Ainda não tem conta? Cadastre-se
+        </router-link>
+      </form>
+    </ValidationObserver>
   </div>
 
 </template>
@@ -34,9 +49,16 @@
 <script>
 
 import { LOGIN } from '@/store/modules/user.module'
+import { ValidationObserver, ValidationProvider } from 'vee-validate'
+import ValidateField from "@/mixins/validation.js"
 
 export default {
   name: "Login",
+
+  components: {
+    ValidationObserver,
+    ValidationProvider
+  },
 
   data() {
     return {
@@ -46,6 +68,8 @@ export default {
       },
     }
   },
+
+  mixins: [ValidateField],
 
   computed: {
     error() {
@@ -85,12 +109,19 @@ export default {
 
     input {
       font-size: 16px;
+      width: 100%;
       margin-bottom: 10px;
       padding: 15px;
       border-radius: 8px;
       background: #EEE;
       border: none;
       outline: none;
+    }
+
+    .error {
+      color: red;
+      display: block;
+      margin-bottom: 10px;
     }
 
     .error-message {

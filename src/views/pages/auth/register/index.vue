@@ -1,41 +1,67 @@
 <template>
   
   <div class="register">
-    <form class="register__form" @submit.prevent="submitNewAccount">
-      <h1 class="register__title">Crie sua conta</h1>
+    <ValidationObserver>
+      <form class="register__form" @submit.prevent="submitNewAccount">
+        <h1 class="register__title">Crie sua conta</h1>
+        
+        <ValidationProvider
+          v-slot="{ errors }"
+          rules="required|alpha"
+        >
+          <input
+            type="text"
+            placeholder="Digite seu nome completo"
+            v-model="newAccountData.name"
+          >
+          <span class="error" v-if="errors[0]">{{ errors[0] }}</span>
+        </ValidationProvider>
 
-      <input
-        type="text"
-        placeholder="Digite seu nome completo"
-        v-model="newAccountData.name"
-      >
+        <ValidationProvider
+          v-slot="{ errors }"
+          rules="required|email"
+        >
+          <input
+            type="email"
+            placeholder="Digite seu e-mail"
+            v-model="newAccountData.email"
+          >
+          <span class="error" v-if="errors[0]">{{ errors[0] }}</span>
+        </ValidationProvider>
 
-      <input
-        type="email"
-        placeholder="Digite seu e-mail"
-        v-model="newAccountData.email"
-      >
+        <ValidationProvider
+          v-slot="{ errors }"
+          rules="required"
+        >
+          <input
+            type="password"
+            placeholder="Digite sua senha"
+            v-model="newAccountData.password"
+          >
+          <span class="error" v-if="errors[0]">{{ errors[0] }}</span>
+        </ValidationProvider>
 
-      <input
-        type="password"
-        placeholder="Digite sua senha"
-        v-model="newAccountData.password"
-      >
+        <ValidationProvider
+          v-slot="{ errors }"
+          rules="required"
+        >
+          <input
+            type="text"
+            placeholder="Digite sua data de nascimento"
+            v-model="newAccountData.birthdate"
+          >
+          <span class="error" v-if="errors[0]">{{ errors[0] }}</span>
+        </ValidationProvider>
 
-      <input
-        type="text"
-        placeholder="Digite sua data de nascimento"
-        v-model="newAccountData.birthdate"
-      >
+        <button class="btn-access">
+          Criar conta
+        </button>
 
-      <button class="btn-access">
-        Criar conta
-      </button>
-
-      <router-link :to="{ name: 'Login' }" class="btn-new-access">
-        Já tem conta? Faça login
-      </router-link>
-    </form>
+        <router-link :to="{ name: 'Login' }" class="btn-new-access">
+          Já tem conta? Faça login
+        </router-link>
+      </form>
+    </ValidationObserver>
   </div>
 
 </template>
@@ -43,8 +69,16 @@
 
 <script>
 
+import { ValidationObserver, ValidationProvider } from 'vee-validate'
+import ValidateField from "@/mixins/validation.js"
+
 export default {
   name: "Login",
+
+  components: {
+    ValidationObserver,
+    ValidationProvider
+  },
 
   data() {
     return {
@@ -57,6 +91,8 @@ export default {
       showError: false,
     }
   },
+
+  mixins: [ValidateField],
 
   computed: {
     error() {
@@ -107,11 +143,18 @@ export default {
     input {
       font-size: 16px;
       margin-bottom: 10px;
+      width: 100%;
       padding: 15px;
       border-radius: 8px;
       background: #EEE;
       border: none;
       outline: none;
+    }
+
+    .error {
+      color: red;
+      display: block;
+      margin-bottom: 10px;
     }
 
     .btn-access {

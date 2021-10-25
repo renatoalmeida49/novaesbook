@@ -1,10 +1,10 @@
 import { extend } from 'vee-validate'
-import { alpha, alpha_num, email, required, numeric, confirmed } from 'vee-validate/dist/rules'
+import { alpha_spaces, alpha_num, email, required, numeric, confirmed } from 'vee-validate/dist/rules'
 
 const ValidateField = {
   created() {
-    extend('alpha', {
-      ...alpha,
+    extend('alpha_spaces', {
+      ...alpha_spaces,
       message: "Deve conter apenas letras"
     })
 

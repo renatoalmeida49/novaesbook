@@ -7,7 +7,7 @@
         
         <ValidationProvider
           v-slot="{ errors }"
-          rules="required|alpha"
+          rules="required|alpha_spaces"
         >
           <input
             type="text"
@@ -45,11 +45,16 @@
           v-slot="{ errors }"
           rules="required"
         >
-          <input
+          <DatePicker
+            v-model="newAccountData.birthdate"
+            format="DD/MMMM/YYYY"
+            placeholder="Selecione sua data de nascimento"
+          />
+          <!-- <input
             type="text"
             placeholder="Digite sua data de nascimento"
             v-model="newAccountData.birthdate"
-          >
+          > -->
           <span class="error" v-if="errors[0]">{{ errors[0] }}</span>
         </ValidationProvider>
 
@@ -70,14 +75,19 @@
 <script>
 
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
+import { DateTime } from "luxon";
 import ValidateField from "@/mixins/validation.js"
+import DatePicker from 'vue2-datepicker';
+import 'vue2-datepicker/index.css';
+import "vue2-datepicker/locale/pt-br";
 
 export default {
-  name: "Login",
+  name: "Register",
 
   components: {
     ValidationObserver,
-    ValidationProvider
+    ValidationProvider,
+    DatePicker
   },
 
   data() {
@@ -104,9 +114,9 @@ export default {
     submitNewAccount() {
       this.$api.post('/users/sign-up', {
         name: this.newAccountData.name,
-        email: this.credentials.email,
-        password: this.credentials.password,
-        birthdate: this.newAccountData.birthdate
+        email: this.newAccountData.email,
+        password: this.newAccountData.password,
+        birthdate: DateTime.fromJSDate(this.newAccountData.birthdate).setLocale("pt-BR").toFormat("yyyy-MM-dd")
       })
         .then(() => {
           this.$router.push({ name: 'Login' })
@@ -155,6 +165,18 @@ export default {
       color: red;
       display: block;
       margin-bottom: 10px;
+    }
+
+    .mx-datepicker {
+      width: 100%;
+      margin-bottom: 10px;
+      font-size: 16px;
+
+      input {
+        margin-bottom: 0;
+        height: 48px;
+        box-shadow: none;
+      }
     }
 
     .btn-access {

@@ -22,9 +22,9 @@
         Acessar
       </button>
 
-      <button class="btn-new-access" type="button">
+      <router-link :to="{ name: 'Register' }" class="btn-new-access">
         Ainda não tem conta? Cadastre-se
-      </button>
+      </router-link>
     </form>
   </div>
 
